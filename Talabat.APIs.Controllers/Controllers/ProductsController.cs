@@ -1,6 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
+using Talabat.APIs.Controllers.DTOModels;
 using Talabat.Core.Contracts;
 using Talabat.Core.Entities.Products;
+using Talabat.Core.Specifications.Products;
 
 namespace Talabat.APIs.Controllers.Controllers
 {
@@ -9,25 +12,36 @@ namespace Talabat.APIs.Controllers.Controllers
     public class ProductsController : ControllerBase
     {
         private readonly IGenericRepository<Product> _genericRepository;
+        private readonly IMapper _mapper;
 
-        public ProductsController(IGenericRepository<Product> genericRepository)
+        public ProductsController(IGenericRepository<Product> genericRepository,IMapper mapper)
         {
             _genericRepository = genericRepository;
+            _mapper = mapper;
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Product>>> GetProducts()
+        public async Task<ActionResult<IEnumerable<ProductDTO>>> GetProducts()
         {
-            var products = await _genericRepository.GetAllAsync();
-            return Ok(products);
+            var specs = new ProductWithBrandAndCategorySpecifications();
+            var products = await _genericRepository.GetAllWithSpecAsync(specs);
+
+            var productsDTO = _mapper.Map<IEnumerable<Product>, IEnumerable<ProductDTO>>(products);
+
+            return Ok(productsDTO);
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<Product>> GetProduct(int id)
+        public async Task<ActionResult<ProductDTO>> GetProduct(int id)
         {
-            var product = await _genericRepository.GetAsync(id);
+            var specs = new ProductWithBrandAndCategorySpecifications(id);
+            var product = await _genericRepository.GetWithSpecAsync(specs);
 
-            return Ok(product);
+            if (product is not { }) return NotFound();
+
+            var productDTO = _mapper.Map<Product, ProductDTO>(product);
+
+            return Ok(productDTO);
         }
     }
 }
