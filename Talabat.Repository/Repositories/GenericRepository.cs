@@ -23,6 +23,12 @@ namespace Talabat.Repository.Repositories
             return await _dbContext.Set<TEntity>().ToListAsync();
         }
 
+        public async Task<IEnumerable<TEntity>> GetAllWithSpecAsync(ISpecifications<TEntity> specs)
+        {
+            return await SpecificationBuilder<TEntity>.GetQuery(_dbContext.Set<TEntity>(),specs).ToListAsync();
+        }
+
+
         public async Task<TEntity?> GetAsync(int id)
         {
             if (typeof(TEntity).Name == typeof(Product).Name)
@@ -31,5 +37,11 @@ namespace Talabat.Repository.Repositories
             }
             return await _dbContext.Set<TEntity>().FindAsync(id);
         }
+
+        public async Task<TEntity?> GetWithSpecAsync(ISpecifications<TEntity> specs)
+        {
+            return await SpecificationBuilder<TEntity>.GetQuery(_dbContext.Set<TEntity>(),specs).FirstOrDefaultAsync();
+        }
+
     }
 }

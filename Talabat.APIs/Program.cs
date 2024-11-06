@@ -1,4 +1,4 @@
-
+using Talabat.APIs.Controllers;
 using Talabat.APIs.Extensions;
 using Talabat.Repository;
 using Talabat.Repository.Data;
@@ -29,6 +29,8 @@ namespace Talabat.APIs
             #region AddCustomServices
 
             builder.Services.AddRepositoryServices(builder.Configuration);
+
+            builder.Services.AddControllersServices();
 
             #endregion
 
@@ -62,7 +64,7 @@ namespace Talabat.APIs
             #endregion
 
             #endregion
-
+            app.UseStaticFiles();
             app.Run();
         }
     }
