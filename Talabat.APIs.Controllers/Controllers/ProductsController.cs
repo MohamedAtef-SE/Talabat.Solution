@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Talabat.APIs.Controllers.DTOModels;
+using Talabat.APIs.Controllers.Errors;
 using Talabat.Core.Contracts;
 using Talabat.Core.Entities.Products;
 using Talabat.Core.Specifications.Products;
@@ -32,12 +34,15 @@ namespace Talabat.APIs.Controllers.Controllers
         }
 
         [HttpGet("{id}")]
+        [ProducesResponseType(typeof(ProductDTO),StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(APIErrorResponse),StatusCodes.Status404NotFound)]
         public async Task<ActionResult<ProductDTO>> GetProduct(int id)
         {
             var specs = new ProductWithBrandAndCategorySpecifications(id);
+            
             var product = await _genericRepository.GetWithSpecAsync(specs);
-
-            if (product is not { }) return NotFound();
+            
+            if (product is not { }) return NotFound(new APIErrorResponse(404));
 
             var productDTO = _mapper.Map<Product, ProductDTO>(product);
 

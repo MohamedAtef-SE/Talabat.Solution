@@ -1,5 +1,8 @@
+using Microsoft.AspNetCore.Mvc;
 using Talabat.APIs.Controllers;
+using Talabat.APIs.Controllers.Errors;
 using Talabat.APIs.Extensions;
+using Talabat.APIs.Middlewares;
 using Talabat.Repository;
 using Talabat.Repository.Data;
 
@@ -15,8 +18,25 @@ namespace Talabat.APIs
 
             // Add services to the container.
 
-            builder.Services.AddControllers()
-                            .AddApplicationPart(typeof(Controllers.AssemblyInformation).Assembly);
+            builder.Services.AddControllers().ConfigureApiBehaviorOptions(O =>
+            {
+                O.SuppressModelStateInvalidFilter = false; // Default
+                O.InvalidModelStateResponseFactory = actionContext => {
+
+                    // ModelState is a Dic [KeyValuePear]
+                    // Key Name Of Param
+                    
+                    var errors = actionContext.ModelState.Where(param => param.Value!.Errors.Count > 0)
+                                                    .SelectMany(param => param.Value!.Errors)
+                                                    .Select(E =>E.ErrorMessage)
+                                                    .ToList();
+
+                    var apiValidationResponse = new ApiValidationResponse(400, null) { Errors = errors };
+                    return new BadRequestObjectResult(apiValidationResponse);
+
+                    };
+
+            }).AddApplicationPart(typeof(Controllers.AssemblyInformation).Assembly);
 
             #region Swagger
 
@@ -46,10 +66,12 @@ namespace Talabat.APIs
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
+                app.UseMiddleware<CustomExceptionMiddleware>();
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
 
+            app.UseStatusCodePagesWithReExecute("/errors/{0}");
             app.UseHttpsRedirection();
 
             app.UseAuthorization();
