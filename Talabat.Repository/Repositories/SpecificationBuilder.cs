@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Talabat.Core.Contracts;
 using Talabat.Core.Entities;
-using Talabat.Repository.Data;
 
 namespace Talabat.Repository.Repositories
 {
@@ -16,6 +15,21 @@ namespace Talabat.Repository.Repositories
             if (specs.Criteria is not null)
             {
                 query =query.Where(specs.Criteria);
+            }
+
+
+            if (specs.OrderBy is not null)
+            {
+                query = query.OrderBy(specs.OrderBy);
+            }
+            else if (specs.OrderByDesc is not null)
+            {
+                query = query.OrderByDescending(specs.OrderByDesc);
+            }
+
+            if (specs.PaginationApplied)
+            {
+                query = query.Skip(specs.Skip).Take(specs.Take);
             }
 
             if (specs.Includes?.Count > 0)

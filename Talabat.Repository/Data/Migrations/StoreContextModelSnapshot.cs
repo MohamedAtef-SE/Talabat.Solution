@@ -33,12 +33,6 @@ namespace Talabat.Repository.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("BrandId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("CategoryId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -54,11 +48,17 @@ namespace Talabat.Repository.Data.Migrations
                     b.Property<decimal?>("Price")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<int?>("ProductBrandId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("ProductCategoryId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("BrandId");
+                    b.HasIndex("ProductBrandId");
 
-                    b.HasIndex("CategoryId");
+                    b.HasIndex("ProductCategoryId");
 
                     b.ToTable("Product");
                 });
@@ -100,18 +100,28 @@ namespace Talabat.Repository.Data.Migrations
             modelBuilder.Entity("Talabat.Core.Entities.Products.Product", b =>
                 {
                     b.HasOne("Talabat.Core.Entities.Products.ProductBrand", "Brand")
-                        .WithMany()
-                        .HasForeignKey("BrandId")
+                        .WithMany("Products")
+                        .HasForeignKey("ProductBrandId")
                         .OnDelete(DeleteBehavior.SetNull);
 
                     b.HasOne("Talabat.Core.Entities.Products.ProductCategory", "Category")
-                        .WithMany()
-                        .HasForeignKey("CategoryId")
+                        .WithMany("Products")
+                        .HasForeignKey("ProductCategoryId")
                         .OnDelete(DeleteBehavior.SetNull);
 
                     b.Navigation("Brand");
 
                     b.Navigation("Category");
+                });
+
+            modelBuilder.Entity("Talabat.Core.Entities.Products.ProductBrand", b =>
+                {
+                    b.Navigation("Products");
+                });
+
+            modelBuilder.Entity("Talabat.Core.Entities.Products.ProductCategory", b =>
+                {
+                    b.Navigation("Products");
                 });
 #pragma warning restore 612, 618
         }

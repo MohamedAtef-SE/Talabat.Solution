@@ -45,36 +45,36 @@ namespace Talabat.Repository.Data.Migrations
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     PictureUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Price = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
-                    BrandId = table.Column<int>(type: "int", nullable: true),
-                    CategoryId = table.Column<int>(type: "int", nullable: true),
+                    ProductBrandId = table.Column<int>(type: "int", nullable: true),
+                    ProductCategoryId = table.Column<int>(type: "int", nullable: true),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Product", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Product_ProductBrand_BrandId",
-                        column: x => x.BrandId,
+                        name: "FK_Product_ProductBrand_ProductBrandId",
+                        column: x => x.ProductBrandId,
                         principalTable: "ProductBrand",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.SetNull);
                     table.ForeignKey(
-                        name: "FK_Product_ProductCategory_CategoryId",
-                        column: x => x.CategoryId,
+                        name: "FK_Product_ProductCategory_ProductCategoryId",
+                        column: x => x.ProductCategoryId,
                         principalTable: "ProductCategory",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.SetNull);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Product_BrandId",
+                name: "IX_Product_ProductBrandId",
                 table: "Product",
-                column: "BrandId");
+                column: "ProductBrandId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Product_CategoryId",
+                name: "IX_Product_ProductCategoryId",
                 table: "Product",
-                column: "CategoryId");
+                column: "ProductCategoryId");
         }
 
         /// <inheritdoc />
