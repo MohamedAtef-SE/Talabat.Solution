@@ -10,7 +10,10 @@ namespace Talabat.Repository.Data.Configs.Products
         {
             base.Configure(builder);
 
-                   
+            builder.HasMany(C => C.Products)
+                   .WithOne(P => P.Category)
+                   .HasForeignKey(P => P.ProductCategoryId)
+                   .OnDelete(DeleteBehavior.SetNull);
         }
     }
 }

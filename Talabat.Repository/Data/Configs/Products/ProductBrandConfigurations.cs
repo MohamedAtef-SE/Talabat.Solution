@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Talabat.Core.Entities.Products;
 
 namespace Talabat.Repository.Data.Configs.Products
@@ -9,7 +10,10 @@ namespace Talabat.Repository.Data.Configs.Products
         {
             base.Configure(builder);
 
-                   
+            builder.HasMany(B => B.Products)
+                .WithOne(P => P.Brand)
+                .HasForeignKey(P => P.ProductBrandId)
+                .OnDelete(DeleteBehavior.SetNull);       
         }
     }
 }

@@ -21,13 +21,13 @@ namespace Talabat.Repository.Data.Configs.Products
                    .HasColumnType("decimal(18,2)");
 
             builder.HasOne(P => P.Category)
-                   .WithMany()
-                   .HasForeignKey(P => P.CategoryId)
+                   .WithMany(C => C.Products)
+                   .HasForeignKey(P => P.ProductCategoryId)
                    .OnDelete(DeleteBehavior.SetNull);
 
             builder.HasOne(P => P.Brand)
-                   .WithMany()
-                   .HasForeignKey(P => P.BrandId)
+                   .WithMany(B => B.Products)
+                   .HasForeignKey(P => P.ProductBrandId)
                    .OnDelete(DeleteBehavior.SetNull);
 
         }

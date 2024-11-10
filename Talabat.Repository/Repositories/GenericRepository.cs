@@ -14,16 +14,18 @@ namespace Talabat.Repository.Repositories
         {
             _dbContext = dbContext;
         }
-        public async Task<IEnumerable<TEntity>> GetAllAsync()
+        public async Task<IReadOnlyList<TEntity>> GetAllAsync()
         {
-            if (typeof(TEntity).Name == typeof(Product).Name)
-            { 
-                return (IEnumerable<TEntity>) await _dbContext.Product.Include(P => P.Brand).Include(P => P.Category).ToListAsync();
-            }
+            //// Before using Specification DP
+            //if (typeof(TEntity).Name == typeof(Product).Name)
+            //{ 
+            //    return (IReadOnlyList<TEntity>) await _dbContext.Product.Include(P => P.Brand).Include(P => P.Category).ToListAsync();
+            //}
+
             return await _dbContext.Set<TEntity>().ToListAsync();
         }
 
-        public async Task<IEnumerable<TEntity>> GetAllWithSpecAsync(ISpecifications<TEntity> specs)
+        public async Task<IReadOnlyList<TEntity>> GetAllWithSpecAsync(ISpecifications<TEntity> specs)
         {
             return await SpecificationBuilder<TEntity>.GetQuery(_dbContext.Set<TEntity>(),specs).ToListAsync();
         }
@@ -31,10 +33,11 @@ namespace Talabat.Repository.Repositories
 
         public async Task<TEntity?> GetAsync(int id)
         {
-            if (typeof(TEntity).Name == typeof(Product).Name)
-            {
-                return  await _dbContext.Product.Include(P => P.Brand).Include(P => P.Category).FirstOrDefaultAsync(P => P.Id.Equals(id)) as TEntity;
-            }
+            //// Before using Specification DP
+            //if (typeof(TEntity).Name == typeof(Product).Name)
+            //{
+            //    return  await _dbContext.Product.Include(P => P.Brand).Include(P => P.Category).FirstOrDefaultAsync(P => P.Id.Equals(id)) as TEntity;
+            //}
             return await _dbContext.Set<TEntity>().FindAsync(id);
         }
 
