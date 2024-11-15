@@ -1,10 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
-using Talabat.APIs.Controllers;
-using Talabat.APIs.Controllers.Errors;
+using Talabat.Core.Application.Abstractions.Errors;
 using Talabat.APIs.Extensions;
 using Talabat.APIs.Middlewares;
 using Talabat.Repository;
-using Talabat.Repository.Data;
+using Talabat.Core.Application;
 
 namespace Talabat.APIs
 {
@@ -18,25 +17,28 @@ namespace Talabat.APIs
 
             // Add services to the container.
 
-            builder.Services.AddControllers().ConfigureApiBehaviorOptions(O =>
+            builder.Services.AddControllers()
+                            .ConfigureApiBehaviorOptions(O =>
             {
                 O.SuppressModelStateInvalidFilter = false; // Default
-                O.InvalidModelStateResponseFactory = actionContext => {
+                O.InvalidModelStateResponseFactory = actionContext =>
+                {
 
                     // ModelState is a Dic [KeyValuePear]
                     // Key Name Of Param
-                    
+
                     var errors = actionContext.ModelState.Where(param => param.Value!.Errors.Count > 0)
                                                     .SelectMany(param => param.Value!.Errors)
-                                                    .Select(E =>E.ErrorMessage)
+                                                    .Select(E => E.ErrorMessage)
                                                     .ToList();
 
                     var apiValidationResponse = new ApiValidationResponse(400, null) { Errors = errors };
                     return new BadRequestObjectResult(apiValidationResponse);
 
-                    };
+                };
 
-            }).AddApplicationPart(typeof(Controllers.AssemblyInformation).Assembly);
+            })
+                            .AddApplicationPart(typeof(Controllers.AssemblyInformation).Assembly);
 
             #region Swagger
 
@@ -50,12 +52,12 @@ namespace Talabat.APIs
 
             builder.Services.AddRepositoryServices(builder.Configuration);
 
-            builder.Services.AddControllersServices();
+            builder.Services.AddIdentityServices(builder.Configuration);
+
+            builder.Services.AddApplicationServices(builder.Configuration);
 
             #endregion
 
-            builder.Services.AddScoped<StoreContextSeed>();
-            
             #endregion
 
 
@@ -73,7 +75,7 @@ namespace Talabat.APIs
 
             app.UseStatusCodePagesWithReExecute("/errors/{0}");
             app.UseHttpsRedirection();
-
+            app.UseAuthentication();
             app.UseAuthorization();
 
 

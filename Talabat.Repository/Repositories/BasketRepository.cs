@@ -1,5 +1,7 @@
-﻿using StackExchange.Redis;
+﻿using AutoMapper;
+using StackExchange.Redis;
 using System.Text.Json;
+using Talabat.Core.Application.Abstractions.DTOModels.Basket;
 using Talabat.Core.Contracts;
 using Talabat.Core.Entities.Basket;
 
@@ -7,10 +9,13 @@ namespace Talabat.Repository.Repositories
 {
     public class BasketRepository : IBasketRepository
     {
+        private readonly IMapper _mapper;
+
         public IDatabase _database { get; set; }
-        public BasketRepository(IConnectionMultiplexer redis)
+        public BasketRepository(IConnectionMultiplexer redis,IMapper mapper)
         {
             _database = redis.GetDatabase();
+            _mapper = mapper;
         }
         public async Task<CustomerBasket?> GetBasketAsync(string basketId)
         {
@@ -22,15 +27,16 @@ namespace Talabat.Repository.Repositories
 
         }
 
-        public async Task<CustomerBasket?> UpdateBasketAsync(CustomerBasket customerBasket)
+        public async Task<CustomerBasket?> UpdateBasketAsync(CustomerBasketDTO customerBasket)
         {
-            var BasketToJson = JsonSerializer.Serialize(customerBasket);
-           var IsCreatedOrUpdated = await _database.StringSetAsync(customerBasket.Id,BasketToJson,TimeSpan.FromDays(1));
+            var mappedCustomerBasket = _mapper.Map<CustomerBasket>(customerBasket);
+            var BasketToJson = JsonSerializer.Serialize(mappedCustomerBasket);
+           var IsCreatedOrUpdated = await _database.StringSetAsync(mappedCustomerBasket.Id,BasketToJson,TimeSpan.FromDays(1));
 
             if(!IsCreatedOrUpdated)  return null;
 
             // return customerBasket; not Recommended because if state of basket got any change in Redis Db, i should return it from Redis Db.
-            return await GetBasketAsync(customerBasket.Id);
+            return await GetBasketAsync(mappedCustomerBasket.Id);
         }
         public async Task<bool> DeleteBasketAsync(string basketId)
         {

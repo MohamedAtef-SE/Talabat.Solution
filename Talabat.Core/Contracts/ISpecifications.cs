@@ -1,5 +1,5 @@
 ﻿using System.Linq.Expressions;
-using Talabat.Core.Entities;
+using Talabat.Core.Application.Entities.Products;
 
 namespace Talabat.Core.Contracts
 {

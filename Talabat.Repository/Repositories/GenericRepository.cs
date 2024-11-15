@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Talabat.Core.Application.Entities.Products;
 using Talabat.Core.Contracts;
-using Talabat.Core.Entities;
-using Talabat.Core.Entities.Products;
 using Talabat.Repository.Data;
 
 namespace Talabat.Repository.Repositories

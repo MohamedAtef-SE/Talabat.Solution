@@ -1,5 +1,7 @@
-﻿using Talabat.Core.Entities.Products;
+﻿using Microsoft.EntityFrameworkCore;
+using Talabat.Core.Application.Entities.Products;
 using Talabat.Repository.Data;
+using Talabat.Repository.Identity;
 
 namespace Talabat.APIs.Extensions
 {
@@ -13,16 +15,33 @@ namespace Talabat.APIs.Extensions
             var service = scope.ServiceProvider; // Services itself
 
             try
-            {   
+            {
                 var dbContext = service.GetRequiredService<StoreContext>(); // ASK CLR For Creating Object from DbContext Explicitly
                 var contextSeed = service.GetRequiredService<StoreContextSeed>();
+                var identityDbContext = service.GetRequiredService<AppIdentityDbContext>();
+                var identitySeed = service.GetRequiredService<AppIdentitySeed>();
+                //var userManager = service.GetRequiredService<UserManager<ApplicationUser>>();
+                
 
                 // Update-Database if there is Any Migration pending found.
-                await contextSeed.UpdateDatabase(); 
+                if (dbContext.Database.GetPendingMigrations().Any())
+                {
+                    await dbContext.Database.MigrateAsync();
+                }
+
+                if (identityDbContext.Database.GetPendingMigrations().Any())
+                {
+                    await identityDbContext.Database.MigrateAsync();
+                }
+
                 // Uplaod DataSeeds after Updating Database.
                 await contextSeed.UploadDataSeeds<ProductCategory>("categories.json");
                 await contextSeed.UploadDataSeeds<ProductBrand>("brands.json");
                 await contextSeed.UploadDataSeeds<Product>("products.json");
+
+                //Uplaod IdentitySeeds
+                await identitySeed.UploadUsersAsync();
+
             }
             catch (Exception ex)
             {
@@ -30,7 +49,7 @@ namespace Talabat.APIs.Extensions
 
                 var logger = loggerFactory.CreateLogger(typeof(InitializationExtention));
 
-                logger.LogError(ex,ex.Message);
+                logger.LogError(ex, ex.Message);
             }
         }
     }

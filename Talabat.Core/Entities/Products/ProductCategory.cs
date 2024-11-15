@@ -1,4 +1,4 @@
-﻿namespace Talabat.Core.Entities.Products
+﻿namespace Talabat.Core.Application.Entities.Products
 {
     public class ProductCategory : BaseEntity
     {

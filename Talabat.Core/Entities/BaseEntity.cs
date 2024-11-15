@@ -1,4 +1,4 @@
-﻿namespace Talabat.Core.Entities
+﻿namespace Talabat.Core.Application.Entities.Products
 {
     public class BaseEntity
     {

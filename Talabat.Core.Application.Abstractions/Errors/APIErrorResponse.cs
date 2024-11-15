@@ -1,5 +1,5 @@
 ﻿
-namespace Talabat.APIs.Controllers.Errors
+namespace Talabat.Core.Application.Abstractions.Errors
 {
     public class APIErrorResponse
     {

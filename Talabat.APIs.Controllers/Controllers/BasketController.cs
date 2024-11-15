@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Talabat.APIs.Controllers.Errors;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Talabat.Core.Application.Abstractions.DTOModels.Basket;
+using Talabat.Core.Application.Abstractions.Errors;
 using Talabat.Core.Contracts;
 using Talabat.Core.Entities.Basket;
 
@@ -30,7 +32,8 @@ namespace Talabat.APIs.Controllers.Controllers
 
 
         [HttpPost]
-        public async Task<ActionResult<CustomerBasket>> UpdateBasket(CustomerBasket customerBasket)
+        [Authorize]
+        public async Task<ActionResult<CustomerBasket>> UpdateBasket(CustomerBasketDTO customerBasket)
         {
             var basket = await _basketRepository.UpdateBasketAsync(customerBasket);
 
