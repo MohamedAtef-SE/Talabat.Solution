@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
 using Microsoft.Extensions.Configuration;
-using Talabat.APIs.Controllers.DTOModels;
-using Talabat.Core.Entities.Products;
+using Talabat.Core.Application.Abstractions.DTOModels;
+using Talabat.Core.Application.Entities.Products;
 
-namespace Talabat.APIs.Controllers.Mapping
+namespace Talabat.Core.Application.Mapping
 {
     internal class ImageUrlResolver(IConfiguration configuration) : IValueResolver<Product, ProductDTO, string?>
     {

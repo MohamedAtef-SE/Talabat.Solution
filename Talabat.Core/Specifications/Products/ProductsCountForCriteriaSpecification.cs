@@ -1,6 +1,4 @@
-﻿using System.Linq.Expressions;
-using Talabat.Core.Contracts;
-using Talabat.Core.Entities.Products;
+﻿using Talabat.Core.Application.Entities.Products;
 
 namespace Talabat.Core.Specifications.Products
 {

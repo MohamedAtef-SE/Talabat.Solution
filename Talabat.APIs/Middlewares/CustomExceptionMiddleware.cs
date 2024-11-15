@@ -1,6 +1,6 @@
 ﻿using System.Net;
 using System.Text.Json;
-using Talabat.APIs.Controllers.Errors;
+using Talabat.Core.Application.Abstractions.Errors;
 
 namespace Talabat.APIs.Middlewares
 {

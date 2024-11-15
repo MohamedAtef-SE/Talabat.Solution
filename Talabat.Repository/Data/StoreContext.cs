@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Talabat.Core.Entities.Products;
+using Talabat.Core.Application.Entities.Products;
 
 namespace Talabat.Repository.Data
 {

@@ -1,10 +1,11 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Talabat.APIs.Controllers.DTOModels;
-using Talabat.APIs.Controllers.Errors;
+using Talabat.Core.Application.Abstractions.Errors;
+using Talabat.Core.Application.Abstractions.DTOModels;
+using Talabat.Core.Application.Entities.Products;
 using Talabat.Core.Contracts;
-using Talabat.Core.Entities.Products;
 using Talabat.Core.Specifications.Products;
 
 namespace Talabat.APIs.Controllers.Controllers
@@ -26,6 +27,7 @@ namespace Talabat.APIs.Controllers.Controllers
             _mapper = mapper;
         }
 
+        [Authorize]
         [HttpGet]
         public async Task<ActionResult<Pagination<ProductDTO>>> GetProducts([FromQuery] ProductSpecParams specParams)
         {

@@ -1,6 +1,4 @@
-﻿using Talabat.Core.Entities.Products;
-
-namespace Talabat.APIs.Controllers.DTOModels
+﻿namespace Talabat.Core.Application.Abstractions.DTOModels
 {
     public class BrandDTO
     {

@@ -1,6 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System.Text.Json;
-using Talabat.Core.Entities;
+﻿using System.Text.Json;
+using Talabat.Core.Application.Entities.Products;
 
 namespace Talabat.Repository.Data
 {
@@ -11,14 +10,6 @@ namespace Talabat.Repository.Data
         public StoreContextSeed(StoreContext dbContext)
         {
             _dbContext = dbContext;
-        }
-
-        public async Task UpdateDatabase()
-        {
-            if (_dbContext.Database.GetPendingMigrations().Any())
-            {
-                await _dbContext.Database.MigrateAsync();
-            }
         }
 
         public async Task UploadDataSeeds<TEntity>(string fileName) where TEntity : BaseEntity

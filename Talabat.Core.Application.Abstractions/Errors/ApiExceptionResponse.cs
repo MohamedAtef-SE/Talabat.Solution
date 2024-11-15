@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Talabat.APIs.Controllers.Errors
+﻿namespace Talabat.Core.Application.Abstractions.Errors
 {
     public class ApiExceptionResponse : APIErrorResponse
     {

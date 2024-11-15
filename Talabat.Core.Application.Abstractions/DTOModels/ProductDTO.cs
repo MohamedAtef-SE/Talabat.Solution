@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Talabat.Core.Entities.Products;
-
-namespace Talabat.APIs.Controllers.DTOModels
+﻿namespace Talabat.Core.Application.Abstractions.DTOModels
 {
     public class ProductDTO
     {

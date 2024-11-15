@@ -1,4 +1,4 @@
-﻿namespace Talabat.APIs.Controllers.DTOModels
+﻿namespace Talabat.Core.Application.Abstractions.DTOModels
 {
     public class Pagination<TEntity>
     {
