@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 
-namespace Talabat.Core.Entities.Identity
+namespace Talabat.Core.Domain.Entities.Identity
 {
     public class ApplicationUser : IdentityUser
     {

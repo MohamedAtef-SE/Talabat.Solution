@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Talabat.Core.Application.Entities.Products;
+using Talabat.Core.Domain.Entities.Products;
 
-namespace Talabat.Repository.Data.Configs.Products
+namespace Talabat.Infrastructure.Persistence.Data.Configs.Products
 {
     internal class ProductConfigurations : BaseConfigurations<Product>
     {
@@ -24,7 +24,7 @@ namespace Talabat.Repository.Data.Configs.Products
                    .WithMany(C => C.Products)
                    .HasForeignKey(P => P.ProductCategoryId)
                    .OnDelete(DeleteBehavior.SetNull);
-
+            
             builder.HasOne(P => P.Brand)
                    .WithMany(B => B.Products)
                    .HasForeignKey(P => P.ProductBrandId)

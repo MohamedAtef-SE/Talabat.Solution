@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using System.Text.Json;
-using Talabat.Core.Entities.Identity;
+using Talabat.Core.Domain.Entities.Identity;
 
-namespace Talabat.Repository.Identity
+namespace Talabat.Infrastructure.Persistence.Identity
 {
     public class AppIdentitySeed
     {

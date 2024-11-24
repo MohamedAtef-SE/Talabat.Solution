@@ -10,7 +10,7 @@ namespace Talabat.Core.Application.Abstractions.DTOModels.Basket
     public class BasketItemDTO
     {
         [Required]
-        int Id { get; set; }
+        public string Id { get; set; } = null!;
         [Required]
         public required string Name { get; set; }
         [Required]
@@ -24,8 +24,8 @@ namespace Talabat.Core.Application.Abstractions.DTOModels.Basket
         [Range(0.1,double.MaxValue,ErrorMessage ="Price can not be Zero!!")]
         public decimal Price { get; set; }
         [Required]
-        public int? ProductBrandId { get; set; }
+        public string? ProductBrandId { get; set; }
         [Required]
-        public int? ProductCategoryId { get; set; }
+        public string? ProductCategoryId { get; set; }
     }
 }

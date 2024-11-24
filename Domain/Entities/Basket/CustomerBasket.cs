@@ -1,4 +1,4 @@
-﻿namespace Talabat.Core.Entities.Basket
+﻿namespace Talabat.Core.Domain.Entities.Basket
 {
     public class CustomerBasket
     {

@@ -1,7 +1,7 @@
 ﻿using System.Linq.Expressions;
-using Talabat.Core.Application.Entities.Products;
+using Talabat.Core.Domain.Entities.Products;
 
-namespace Talabat.Core.Contracts
+namespace Talabat.Core.Domain.Contracts
 {
     public interface ISpecifications<TEntity> where TEntity : BaseEntity
     {

@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Talabat.APIs", "Talabat.API
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Talabat.Core.Application", "Talabat.Core\Talabat.Core.Application.csproj", "{A7456FF5-2FCB-4C64-AD1B-C250AF67D9D9}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Talabat.Repository", "Talabat.Repository\Talabat.Repository.csproj", "{8A18D18A-6B86-4318-9705-7F01E5477160}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Talabat.Infrastructure.Persistence", "Talabat.Repository\Talabat.Infrastructure.Persistence.csproj", "{8A18D18A-6B86-4318-9705-7F01E5477160}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "APIs", "APIs", "{2B63FEFC-4766-4751-98F3-917E6B90A6F9}"
 EndProject
@@ -15,7 +15,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Talabat.APIs.Controllers", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{7C8F5E19-06CA-4988-9B7D-081D7EF85BC4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Talabat.Core.Application.Abstractions", "Talabat.Core.Application.Abstractions\Talabat.Core.Application.Abstractions.csproj", "{95D0D1C3-F299-4E93-AC8C-DD2CC2359F22}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Talabat.Core.Application.Abstractions", "Talabat.Core.Application.Abstractions\Talabat.Core.Application.Abstractions.csproj", "{95D0D1C3-F299-4E93-AC8C-DD2CC2359F22}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Talabat.Core.Domain", "Domain\Talabat.Core.Domain.csproj", "{8246E622-EF15-494C-AA4F-E4F96B588914}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{78D994C6-0A04-4219-9314-8440709FE52A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -43,6 +47,10 @@ Global
 		{95D0D1C3-F299-4E93-AC8C-DD2CC2359F22}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{95D0D1C3-F299-4E93-AC8C-DD2CC2359F22}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{95D0D1C3-F299-4E93-AC8C-DD2CC2359F22}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8246E622-EF15-494C-AA4F-E4F96B588914}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8246E622-EF15-494C-AA4F-E4F96B588914}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8246E622-EF15-494C-AA4F-E4F96B588914}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8246E622-EF15-494C-AA4F-E4F96B588914}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -50,8 +58,10 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{E137D6FC-609B-4B4C-AD79-4DD87D075048} = {2B63FEFC-4766-4751-98F3-917E6B90A6F9}
 		{A7456FF5-2FCB-4C64-AD1B-C250AF67D9D9} = {7C8F5E19-06CA-4988-9B7D-081D7EF85BC4}
+		{8A18D18A-6B86-4318-9705-7F01E5477160} = {78D994C6-0A04-4219-9314-8440709FE52A}
 		{E6D2847B-9F6E-4AFB-93E3-2E5D97E2B654} = {2B63FEFC-4766-4751-98F3-917E6B90A6F9}
 		{95D0D1C3-F299-4E93-AC8C-DD2CC2359F22} = {7C8F5E19-06CA-4988-9B7D-081D7EF85BC4}
+		{8246E622-EF15-494C-AA4F-E4F96B588914} = {7C8F5E19-06CA-4988-9B7D-081D7EF85BC4}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {81AB78F1-1BAE-49A7-9011-A7CE215629C4}

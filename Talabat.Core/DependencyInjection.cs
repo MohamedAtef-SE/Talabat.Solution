@@ -3,6 +3,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Talabat.Core.Application.Abstractions.Services;
 using Talabat.Core.Application.Mapping;
 using Talabat.Core.Application.Services.Auth;
+using Talabat.Core.Application.Services.Orders;
+using Talabat.Core.Application.UnitOfWorks;
+using Talabat.Core.Domain.Contracts;
 
 namespace Talabat.Core.Application
 {
@@ -17,6 +20,10 @@ namespace Talabat.Core.Application
             services.Configure<JwtSettings>(configuration.GetSection("JwtSettings"));
 
             services.AddAutoMapper(typeof(MappingProfile));
+
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+            services.AddScoped<IOrderService, OrderServices>();
 
             return services;
         }

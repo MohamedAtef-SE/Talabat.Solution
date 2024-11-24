@@ -1,34 +1,34 @@
 [
   {
-    "Id": 0,
+    "Id": null,
     "Name": "Frappuccino"
   },
   {
-    "Id": 0,
+    "Id": null,
     "Name": "Latte"
   },
   {
-    "Id": 0,
+    "Id": null,
     "Name": "Mocha"
   },
   {
-    "Id": 0,
+    "Id": null,
     "Name": "Macchiato"
   },
   {
-    "Id": 0,
+    "Id": null,
     "Name": "Matcha"
   },
   {
-    "Id": 0,
+    "Id": null,
     "Name": "Cake"
   },
   {
-    "Id": 0,
+    "Id": null,
     "Name": "Donuts"
   },
   {
-    "Id": 0,
+    "Id": null,
     "Name": "Salad"
   }
 ]

@@ -2,12 +2,13 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using StackExchange.Redis;
-using Talabat.Core.Contracts;
+using Talabat.Core.Domain.Contracts;
+using Talabat.Infrastructure.Persistence.Data;
+using Talabat.Infrastructure.Persistence.Identity;
+using Talabat.Infrastructure.Persistence.Repositories;
 using Talabat.Repository.Data;
-using Talabat.Repository.Identity;
-using Talabat.Repository.Repositories;
 
-namespace Talabat.Repository
+namespace Talabat.Infrastructure.Persistence
 {
     public static class DependencyInjection
     {

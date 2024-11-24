@@ -4,11 +4,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Talabat.Repository.Data;
+using Talabat.Infrastructure.Persistence.Data;
 
 #nullable disable
 
-namespace Talabat.Repository.Data.Migrations
+namespace Talabat.Infrastructure.Persistence.Data.Migrations
 {
     [DbContext(typeof(StoreContext))]
     partial class StoreContextModelSnapshot : ModelSnapshot
@@ -17,7 +17,7 @@ namespace Talabat.Repository.Data.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.10")
+                .HasAnnotation("ProductVersion", "8.0.11")
                 .HasAnnotation("Proxies:ChangeTracking", false)
                 .HasAnnotation("Proxies:CheckEquality", false)
                 .HasAnnotation("Proxies:LazyLoading", true)
@@ -25,13 +25,95 @@ namespace Talabat.Repository.Data.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("Talabat.Core.Entities.Products.Product", b =>
+            modelBuilder.Entity("Talabat.Core.Domain.Entities.Orders.DeliveryMethod", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<string>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<decimal>("Cost")
+                        .HasColumnType("decimal(9,2)");
+
+                    b.Property<string>("DeliveryTime")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ShortName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("DeliveryMethods");
+                });
+
+            modelBuilder.Entity("Talabat.Core.Domain.Entities.Orders.Order", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("BuyerEmail")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTimeOffset>("Date")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("DeliveryMethodId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("PaymentIntentId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("Subtotal")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DeliveryMethodId");
+
+                    b.ToTable("Orders");
+                });
+
+            modelBuilder.Entity("Talabat.Core.Domain.Entities.Orders.OrderItem", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("OrderId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("Quantity")
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    b.HasKey("Id");
+
+                    b.HasIndex("OrderId");
+
+                    b.ToTable("OrderItems");
+                });
+
+            modelBuilder.Entity("Talabat.Core.Domain.Entities.Products.Product", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -45,14 +127,14 @@ namespace Talabat.Repository.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<decimal?>("Price")
+                    b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int?>("ProductBrandId")
-                        .HasColumnType("int");
+                    b.Property<string>("ProductBrandId")
+                        .HasColumnType("nvarchar(450)");
 
-                    b.Property<int?>("ProductCategoryId")
-                        .HasColumnType("int");
+                    b.Property<string>("ProductCategoryId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
 
@@ -63,13 +145,11 @@ namespace Talabat.Repository.Data.Migrations
                     b.ToTable("Product");
                 });
 
-            modelBuilder.Entity("Talabat.Core.Entities.Products.ProductBrand", b =>
+            modelBuilder.Entity("Talabat.Core.Domain.Entities.Products.ProductBrand", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<string>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -80,13 +160,11 @@ namespace Talabat.Repository.Data.Migrations
                     b.ToTable("ProductBrand");
                 });
 
-            modelBuilder.Entity("Talabat.Core.Entities.Products.ProductCategory", b =>
+            modelBuilder.Entity("Talabat.Core.Domain.Entities.Products.ProductCategory", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<string>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -97,14 +175,99 @@ namespace Talabat.Repository.Data.Migrations
                     b.ToTable("ProductCategory");
                 });
 
-            modelBuilder.Entity("Talabat.Core.Entities.Products.Product", b =>
+            modelBuilder.Entity("Talabat.Core.Domain.Entities.Orders.Order", b =>
                 {
-                    b.HasOne("Talabat.Core.Entities.Products.ProductBrand", "Brand")
+                    b.HasOne("Talabat.Core.Domain.Entities.Orders.DeliveryMethod", "DeliveryMethod")
+                        .WithMany()
+                        .HasForeignKey("DeliveryMethodId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.OwnsOne("Talabat.Core.Domain.Entities.Orders.Address", "ShippingAddress", b1 =>
+                        {
+                            b1.Property<string>("OrderId")
+                                .HasColumnType("nvarchar(450)");
+
+                            b1.Property<string>("City")
+                                .IsRequired()
+                                .HasColumnType("nvarchar(max)");
+
+                            b1.Property<string>("Country")
+                                .IsRequired()
+                                .HasColumnType("nvarchar(max)");
+
+                            b1.Property<string>("FirstName")
+                                .IsRequired()
+                                .HasColumnType("nvarchar(max)");
+
+                            b1.Property<string>("LastName")
+                                .IsRequired()
+                                .HasColumnType("nvarchar(max)");
+
+                            b1.Property<string>("Street")
+                                .IsRequired()
+                                .HasColumnType("nvarchar(max)");
+
+                            b1.HasKey("OrderId");
+
+                            b1.ToTable("Orders");
+
+                            b1.WithOwner()
+                                .HasForeignKey("OrderId");
+                        });
+
+                    b.Navigation("DeliveryMethod");
+
+                    b.Navigation("ShippingAddress")
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Talabat.Core.Domain.Entities.Orders.OrderItem", b =>
+                {
+                    b.HasOne("Talabat.Core.Domain.Entities.Orders.Order", "Order")
+                        .WithMany("Items")
+                        .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.OwnsOne("Talabat.Core.Domain.Entities.Orders.OrderedProductItem", "Product", b1 =>
+                        {
+                            b1.Property<string>("OrderItemId")
+                                .HasColumnType("nvarchar(450)");
+
+                            b1.Property<string>("PictureUrl")
+                                .HasColumnType("nvarchar(max)");
+
+                            b1.Property<string>("ProductId")
+                                .IsRequired()
+                                .HasColumnType("nvarchar(max)");
+
+                            b1.Property<string>("ProductName")
+                                .IsRequired()
+                                .HasColumnType("nvarchar(max)");
+
+                            b1.HasKey("OrderItemId");
+
+                            b1.ToTable("OrderItems");
+
+                            b1.WithOwner()
+                                .HasForeignKey("OrderItemId");
+                        });
+
+                    b.Navigation("Order");
+
+                    b.Navigation("Product")
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Talabat.Core.Domain.Entities.Products.Product", b =>
+                {
+                    b.HasOne("Talabat.Core.Domain.Entities.Products.ProductBrand", "Brand")
                         .WithMany("Products")
                         .HasForeignKey("ProductBrandId")
                         .OnDelete(DeleteBehavior.SetNull);
 
-                    b.HasOne("Talabat.Core.Entities.Products.ProductCategory", "Category")
+                    b.HasOne("Talabat.Core.Domain.Entities.Products.ProductCategory", "Category")
                         .WithMany("Products")
                         .HasForeignKey("ProductCategoryId")
                         .OnDelete(DeleteBehavior.SetNull);
@@ -114,12 +277,17 @@ namespace Talabat.Repository.Data.Migrations
                     b.Navigation("Category");
                 });
 
-            modelBuilder.Entity("Talabat.Core.Entities.Products.ProductBrand", b =>
+            modelBuilder.Entity("Talabat.Core.Domain.Entities.Orders.Order", b =>
+                {
+                    b.Navigation("Items");
+                });
+
+            modelBuilder.Entity("Talabat.Core.Domain.Entities.Products.ProductBrand", b =>
                 {
                     b.Navigation("Products");
                 });
 
-            modelBuilder.Entity("Talabat.Core.Entities.Products.ProductCategory", b =>
+            modelBuilder.Entity("Talabat.Core.Domain.Entities.Products.ProductCategory", b =>
                 {
                     b.Navigation("Products");
                 });

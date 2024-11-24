@@ -2,8 +2,8 @@
 using Microsoft.AspNetCore.Mvc;
 using Talabat.Core.Application.Abstractions.DTOModels.Basket;
 using Talabat.Core.Application.Abstractions.Errors;
-using Talabat.Core.Contracts;
-using Talabat.Core.Entities.Basket;
+using Talabat.Core.Domain.Contracts;
+using Talabat.Core.Domain.Entities.Basket;
 
 
 namespace Talabat.APIs.Controllers.Controllers

@@ -1,4 +1,4 @@
-﻿using Talabat.Core.Application.Entities.Products;
+﻿using Talabat.Core.Domain.Entities.Products;
 
 namespace Talabat.Core.Specifications.Products
 {
@@ -6,9 +6,9 @@ namespace Talabat.Core.Specifications.Products
     {
         public ProductWithBrandAndCategorySpecifications(ProductSpecParams specParams)
             : base(
-                  P => (!specParams.BrandId.HasValue || P.ProductBrandId == specParams.BrandId.Value)
+                  P => (!specParams.BrandId.HasValue || P.ProductBrandId.Equals(specParams.BrandId.Value))
                        &&
-                       (!specParams.CategoryId.HasValue || P.ProductCategoryId == specParams.CategoryId.Value)
+                       (!specParams.CategoryId.HasValue || P.ProductCategoryId.Equals(specParams.CategoryId.Value))
                        &&
                        (string.IsNullOrEmpty(specParams.Search) || P.Name.Contains(specParams.Search))
 
@@ -22,7 +22,7 @@ namespace Talabat.Core.Specifications.Products
         }
 
 
-        public ProductWithBrandAndCategorySpecifications(int id) : base(P => P.Id == id)
+        public ProductWithBrandAndCategorySpecifications(string id) : base(P => P.Id.Equals(id))
         {
             // AddIncludes() already invoked through base()
         }

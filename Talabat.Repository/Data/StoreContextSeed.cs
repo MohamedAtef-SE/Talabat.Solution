@@ -1,5 +1,6 @@
 ﻿using System.Text.Json;
-using Talabat.Core.Application.Entities.Products;
+using Talabat.Core.Domain.Entities.Products;
+using Talabat.Infrastructure.Persistence.Data;
 
 namespace Talabat.Repository.Data
 {
