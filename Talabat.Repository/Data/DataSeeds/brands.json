@@ -1,30 +1,30 @@
 [
   {
-    "Id": 0,
+    "Id": null,
     "Name": "Starbucks"
   },
   {
-    "Id": 0,
+    "Id": null,
     "Name": "Costa"
   },
   {
-    "Id": 0,
+    "Id": null,
     "Name": "Cilantro"
   },
   {
-    "Id": 0,
+    "Id": null,
     "Name": "TBS"
   },
   {
-    "Id": 0,
+    "Id": null,
     "Name": "On The Run"
   },
   {
-    "Id": 0,
+    "Id": null,
     "Name": "Caribou"
   },
   {
-    "Id": 0,
+    "Id": null,
     "Name": "Krispy Kreme"
   }
 ]

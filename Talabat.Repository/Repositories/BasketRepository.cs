@@ -2,10 +2,10 @@
 using StackExchange.Redis;
 using System.Text.Json;
 using Talabat.Core.Application.Abstractions.DTOModels.Basket;
-using Talabat.Core.Contracts;
-using Talabat.Core.Entities.Basket;
+using Talabat.Core.Domain.Contracts;
+using Talabat.Core.Domain.Entities.Basket;
 
-namespace Talabat.Repository.Repositories
+namespace Talabat.Infrastructure.Persistence.Repositories
 {
     public class BasketRepository : IBasketRepository
     {

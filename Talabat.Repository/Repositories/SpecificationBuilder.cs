@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Talabat.Core.Application.Entities.Products;
-using Talabat.Core.Contracts;
+using Talabat.Core.Domain.Contracts;
+using Talabat.Core.Domain.Entities.Products;
 
-namespace Talabat.Repository.Repositories
+namespace Talabat.Infrastructure.Persistence.Repositories
 {
     internal static class SpecificationBuilder<TEntity> where TEntity : BaseEntity
     {

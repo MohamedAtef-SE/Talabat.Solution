@@ -1,101 +1,101 @@
 [
   {
-    "Id": 0,
+    "Id": null,
     "Name": "Double Caramel Frappuccino",
     "Description": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna.",
     "Price": 200,
     "PictureUrl": "images/products/sb-ang1.png",
-    "ProductCategoryId": 1,
-    "ProductBrandId": 2
+    "ProductCategoryId": null,
+    "ProductBrandId": null
   },
   {
-    "Id": 0,
+    "Id": null,
     "Name": "White Chocolate Mocha Frappuccino",
     "Description": "Nunc viverra imperdiet enim. Fusce est. Vivamus a tellus.",
     "Price": 150,
     "PictureUrl": "images/products/sb-ang2.png",
-    "ProductCategoryId": 1,
-    "ProductBrandId": 1
+    "ProductCategoryId": null,
+    "ProductBrandId": null
   },
   {
-    "Id": 0,
+    "Id": null,
     "Name": "Iced Cafe Latte",
     "Description": "Suspendisse dui purus, scelerisque at, vulputate vitae, pretium mattis, nunc. Mauris eget neque at sem venenatis eleifend. Ut nonummy.",
     "Price": 180,
     "PictureUrl": "images/products/sb-core1.png",
-    "ProductCategoryId": 2,
-    "ProductBrandId": 3
+    "ProductCategoryId": null,
+    "ProductBrandId": null
   },
   {
-    "Id": 0,
+    "Id": null,
     "Name": "White Chocolate Mocha",
     "Description": "Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Proin pharetra nonummy pede. Mauris et orci.",
     "Price": 300,
     "PictureUrl": "images/products/sb-core2.png",
-    "ProductCategoryId": 3,
-    "ProductBrandId": 2
+    "ProductCategoryId": null,
+    "ProductBrandId": null
   },
   {
-    "Id": 0,
+    "Id": null,
     "Name": "Iced Caramel Macchiato",
     "Description": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna.",
     "Price": 250,
     "PictureUrl": "images/products/sb-react1.png",
-    "ProductCategoryId": 4,
-    "ProductBrandId": 1
+    "ProductCategoryId": null,
+    "ProductBrandId": null
   },
   {
-    "Id": 0,
+    "Id": null,
     "Name": "Hot Caramel Macchiato",
     "Description": "Aenean nec lorem. In porttitor. Donec laoreet nonummy augue.",
     "Price": 120,
     "PictureUrl": "images/products/sb-ts1.png",
-    "ProductCategoryId": 4,
-    "ProductBrandId": 5
+    "ProductCategoryId": null,
+    "ProductBrandId": null
   },
   {
-    "Id": 0,
+    "Id": null,
     "Name": "Iced Matcha Latte",
     "Description": "Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna.",
     "Price": 10,
     "PictureUrl": "images/products/hat-core1.png",
-    "ProductCategoryId": 2,
-    "ProductBrandId": 4
+    "ProductCategoryId": null,
+    "ProductBrandId": null
   },
   {
-    "Id": 0,
+    "Id": null,
     "Name": "Honey Cake",
     "Description": "Suspendisse dui purus, scelerisque at, vulputate vitae, pretium mattis, nunc. Mauris eget neque at sem venenatis eleifend. Ut nonummy.",
     "Price": 8,
     "PictureUrl": "images/products/hat-react1.png",
-    "ProductCategoryId": 6,
-    "ProductBrandId": 3
+    "ProductCategoryId": null,
+    "ProductBrandId": null
   },
   {
-    "Id": 0,
+    "Id": null,
     "Name": "Blueberry Cheesecake",
     "Description": "Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna.",
     "Price": 15,
     "PictureUrl": "images/products/hat-react2.png",
-    "ProductCategoryId": 6,
-    "ProductBrandId": 7
+    "ProductCategoryId": null,
+    "ProductBrandId": null
   },
   {
-    "Id": 0,
+    "Id": null,
     "Name": "Glazed Donuts",
     "Description": "Nunc viverra imperdiet enim. Fusce est. Vivamus a tellus.",
     "Price": 18,
     "PictureUrl": "images/products/glove-code1.png",
-    "ProductCategoryId": 7,
-    "ProductBrandId": 7
+    "ProductCategoryId": null,
+    "ProductBrandId": null
   },
   {
-    "Id": 0,
+    "Id": null,
     "Name": "Greek Salad",
     "Description": "Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Proin pharetra nonummy pede. Mauris et orci.",
     "Price": 15,
     "PictureUrl": "images/products/glove-code2.png",
-    "ProductCategoryId": 8,
-    "ProductBrandId": 6
+    "ProductCategoryId": null,
+    "ProductBrandId": null
   }
 ]

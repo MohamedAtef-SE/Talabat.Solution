@@ -1,9 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
-using Talabat.Core.Application.Abstractions.Errors;
 using Talabat.APIs.Extensions;
 using Talabat.APIs.Middlewares;
-using Talabat.Repository;
 using Talabat.Core.Application;
+using Talabat.Core.Application.Abstractions.Errors;
+using Talabat.Infrastructure.Persistence;
 
 namespace Talabat.APIs
 {

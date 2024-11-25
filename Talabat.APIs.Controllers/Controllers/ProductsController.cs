@@ -2,10 +2,10 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Talabat.Core.Application.Abstractions.Errors;
 using Talabat.Core.Application.Abstractions.DTOModels;
-using Talabat.Core.Application.Entities.Products;
-using Talabat.Core.Contracts;
+using Talabat.Core.Application.Abstractions.Errors;
+using Talabat.Core.Domain.Contracts;
+using Talabat.Core.Domain.Entities.Products;
 using Talabat.Core.Specifications.Products;
 
 namespace Talabat.APIs.Controllers.Controllers
@@ -71,7 +71,7 @@ namespace Talabat.APIs.Controllers.Controllers
         [HttpGet("{id}")]
         [ProducesResponseType(typeof(ProductDTO), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(APIErrorResponse), StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<ProductDTO>> GetProduct(int id)
+        public async Task<ActionResult<ProductDTO>> GetProduct(string id)
         {
             var specs = new ProductWithBrandAndCategorySpecifications(id);
 

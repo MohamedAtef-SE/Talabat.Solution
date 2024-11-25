@@ -1,9 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Talabat.Core.Entities.Identity;
+using Talabat.Core.Domain.Entities.Identity;
+using Talabat.Infrastructure.Persistence._Common;
+using Talabat.Repository.Identity;
 
-namespace Talabat.Repository.Identity.Config
+namespace Talabat.Infrastructure.Persistence.Identity.Config
 {
+    [DBContextType(typeof(AppIdentityDbContext))]
     internal class ApplicationUserConfigurations : IEntityTypeConfiguration<ApplicationUser>
     {
         public void Configure(EntityTypeBuilder<ApplicationUser> builder)

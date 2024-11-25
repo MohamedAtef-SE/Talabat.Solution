@@ -1,9 +1,10 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using Talabat.Core.Entities.Identity;
-using Talabat.Repository.Identity.Config;
+using System.Reflection;
+using Talabat.Core.Domain.Entities.Identity;
+using Talabat.Infrastructure.Persistence._Common;
 
-namespace Talabat.Repository.Identity
+namespace Talabat.Infrastructure.Persistence.Identity
 {
     public class AppIdentityDbContext : IdentityDbContext<ApplicationUser>
     {
@@ -15,7 +16,9 @@ namespace Talabat.Repository.Identity
         {
             base.OnModelCreating(builder);
 
-            builder.ApplyConfiguration(new ApplicationUserConfigurations());
+            //builder.ApplyConfiguration(new ApplicationUserConfigurations());
+            builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly(),
+                                                    type => type.GetCustomAttribute<DBContextTypeAttribute>()?.DBType == typeof(AppIdentityDbContext));
         }
     }
 }

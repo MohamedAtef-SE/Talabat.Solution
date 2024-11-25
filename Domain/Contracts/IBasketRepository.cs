@@ -1,7 +1,7 @@
 ﻿using Talabat.Core.Application.Abstractions.DTOModels.Basket;
-using Talabat.Core.Entities.Basket;
+using Talabat.Core.Domain.Entities.Basket;
 
-namespace Talabat.Core.Contracts
+namespace Talabat.Core.Domain.Contracts
 {
     public interface IBasketRepository
     {

@@ -8,9 +8,8 @@ using System.Security.Claims;
 using System.Text;
 using Talabat.Core.Application.Abstractions.DTOModels;
 using Talabat.Core.Application.Abstractions.DTOModels.Auth;
-using Talabat.Core.Application.Abstractions.Errors;
 using Talabat.Core.Application.Abstractions.Services;
-using Talabat.Core.Entities.Identity;
+using Talabat.Core.Domain.Entities.Identity;
 
 namespace Talabat.Core.Application.Services.Auth
 {

@@ -1,5 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Talabat.Core.Application.Entities.Products;
+using Talabat.Core.Domain.Entities.Orders;
+using Talabat.Core.Domain.Entities.Products;
+using Talabat.Infrastructure.Persistence.Data;
+using Talabat.Infrastructure.Persistence.Identity;
 using Talabat.Repository.Data;
 using Talabat.Repository.Identity;
 
@@ -21,7 +24,7 @@ namespace Talabat.APIs.Extensions
                 var identityDbContext = service.GetRequiredService<AppIdentityDbContext>();
                 var identitySeed = service.GetRequiredService<AppIdentitySeed>();
                 //var userManager = service.GetRequiredService<UserManager<ApplicationUser>>();
-                
+
 
                 // Update-Database if there is Any Migration pending found.
                 if (dbContext.Database.GetPendingMigrations().Any())
@@ -38,6 +41,8 @@ namespace Talabat.APIs.Extensions
                 await contextSeed.UploadDataSeeds<ProductCategory>("categories.json");
                 await contextSeed.UploadDataSeeds<ProductBrand>("brands.json");
                 await contextSeed.UploadDataSeeds<Product>("products.json");
+
+                await contextSeed.UploadDataSeeds<DeliveryMethod>("deliveryMethods.json");
 
                 //Uplaod IdentitySeeds
                 await identitySeed.UploadUsersAsync();
