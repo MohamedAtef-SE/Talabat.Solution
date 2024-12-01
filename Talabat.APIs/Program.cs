@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 using Talabat.APIs.Extensions;
 using Talabat.APIs.Middlewares;
@@ -40,6 +41,16 @@ namespace Talabat.APIs
             })
                             .AddApplicationPart(typeof(Controllers.AssemblyInformation).Assembly);
 
+            builder.Services.AddCors(CorsOptions => 
+            {
+                CorsOptions.AddPolicy("TalabatPolicy", configurePolicy => 
+                {
+                    configurePolicy.AllowAnyHeader();
+                    configurePolicy.AllowAnyMethod();
+                    configurePolicy.WithOrigins(builder.Configuration["FrontEndURLs:baseURL"]!);
+                });
+            });
+
             #region Swagger
 
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -75,6 +86,7 @@ namespace Talabat.APIs
 
             app.UseStatusCodePagesWithReExecute("/errors/{0}");
             app.UseHttpsRedirection();
+            app.UseCors("TalabatPolicy");
             app.UseAuthentication();
             app.UseAuthorization();
 

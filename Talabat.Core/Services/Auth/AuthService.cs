@@ -42,7 +42,7 @@ namespace Talabat.Core.Application.Services.Auth
             var newUser = new ApplicationUser()
             {
                 DisplayName = registerDTO.DisplayName,
-                UserName = registerDTO.UserName,
+                UserName = registerDTO.Email.Split('@')[0],
                 Email = registerDTO.Email,
                 PhoneNumber = registerDTO.PhoneNumber
             };
@@ -57,7 +57,6 @@ namespace Talabat.Core.Application.Services.Auth
 
             return userDTO;
         }
-
         public async Task<UserDTO> Login(SignInDTO signInDTO)
         {
             var user = await _userManager.FindByEmailAsync(signInDTO.Email);
@@ -85,12 +84,11 @@ namespace Talabat.Core.Application.Services.Auth
                 Token = await GenerateTokenAsync(user)
             };
         }
-
         public async Task<AddressDTO> UpdateAddress(ClaimsPrincipal User, AddressDTO addressDTO)
         {
             var user = await _userManager.GetUserWithAdressAsync(User);
 
-            addressDTO.Id = user.Address.Id;
+            addressDTO.Id = user.Address?.Id ?? null;
 
             var mappedAddress = _mapper.Map<AddressDTO,Address>(addressDTO);
 
@@ -104,7 +102,6 @@ namespace Talabat.Core.Application.Services.Auth
             return addressDTO;
 
         }
-
         public async Task<AddressDTO> GetUserAddressAsync(ClaimsPrincipal User)
         {
             var email = User.FindFirstValue(ClaimTypes.Email);
@@ -140,6 +137,10 @@ namespace Talabat.Core.Application.Services.Auth
                 );
 
             return new JwtSecurityTokenHandler().WriteToken(Token);
+        }
+        public async Task<bool> checkEmailExists(string email)
+        {
+            return await _userManager.FindByEmailAsync(email) is not null;
         }
     }
 }

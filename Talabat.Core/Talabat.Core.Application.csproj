@@ -15,6 +15,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Domain\Talabat.Core.Domain.csproj" />
     <ProjectReference Include="..\Talabat.Core.Application.Abstractions\Talabat.Core.Application.Abstractions.csproj" />
+    <ProjectReference Include="..\Talabat.Infrastructure\Talabat.Infrastructure.csproj" />
     <ProjectReference Include="..\Talabat.Repository\Talabat.Infrastructure.Persistence.csproj" />
   </ItemGroup>
 

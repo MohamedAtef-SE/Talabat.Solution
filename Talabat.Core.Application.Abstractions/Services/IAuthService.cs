@@ -11,5 +11,6 @@ namespace Talabat.Core.Application.Abstractions.Services
         Task<UserDTO> GetCurrentUser();
         Task<AddressDTO> GetUserAddressAsync(ClaimsPrincipal User);
         Task<AddressDTO> UpdateAddress(ClaimsPrincipal User, AddressDTO addressDTO);
+        Task<bool> checkEmailExists(string email);
     }
 }

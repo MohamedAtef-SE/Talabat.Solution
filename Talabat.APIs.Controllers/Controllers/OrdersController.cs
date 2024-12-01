@@ -12,44 +12,44 @@ namespace Talabat.APIs.Controllers.Controllers
     [ApiController]
     [Route("api/[controller]")]
     [Authorize]
-    public class OrderController : ControllerBase
+    public class OrdersController : ControllerBase
     {
         private readonly IOrderService _orderService;
-        public OrderController(IOrderService orderService)
+        public OrdersController(IOrderService orderService)
         {
             _orderService = orderService;
         }
 
-        [HttpPost("CreateOrder")]
+        [HttpPost]
         [ProducesResponseType(typeof(OrderDTO),StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(BadRequest),StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult<OrderDTO?>> CreateOrder(OrderParams orderParams)
+        public async Task<ActionResult<OrderDTO?>> CreateOrder(CreateOrderDTO createOrder)
         {
-            orderParams.BuyerEmail =  User.FindFirstValue(ClaimTypes.Email)!;
+            createOrder.BuyerEmail =  User.FindFirstValue(ClaimTypes.Email)!;
 
-            var order = await _orderService.CreateOrderAsync(orderParams);
+            var order = await _orderService.CreateOrderAsync(createOrder);
 
             if (order is null) return BadRequest(new APIErrorResponse(400,"Can't create this order."));
 
             return Ok(order);
         }
 
-        [HttpGet("UserOrders")]
+        [HttpGet]
         [Authorize]
-        public async Task<ActionResult<IReadOnlyList<OrderDTO>>> GetUserOrders()
+        public async Task<ActionResult<IReadOnlyList<OrderDTO>>> GetOrdersForUser()
         {
             var userEmail = User.FindFirstValue(ClaimTypes.Email);
             var orders = await _orderService.GetOrdersForSpecificUserAsync(userEmail!);
 
-            if (orders?.Count() > 0)
+            if (orders?.Count() == 0)
                 return NotFound(new APIErrorResponse(404, "no orders found."));  
             
             return Ok(orders);
         }
 
-        [HttpGet("UserSpecificOrder/{id}")]
+        [HttpGet("{id}")]
         [Authorize]
-        public async Task<ActionResult<OrderDTO>> GetSpecificUserOrder(string id)
+        public async Task<ActionResult<OrderDTO>> getOrderDetailed(string id)
         {
             var userEmail = User.FindFirstValue(ClaimTypes.Email);
             var order = await _orderService.GetOrderByIdAsync(userEmail,id);

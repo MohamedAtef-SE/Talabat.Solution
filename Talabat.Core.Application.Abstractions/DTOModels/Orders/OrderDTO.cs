@@ -7,7 +7,7 @@
         public DateTimeOffset Date { get; set; } 
         public string Status { get; set; } = null!;
         public AddressDTO ShippingAddress { get; set; } = null!;
-        public string DeliveryMethodId { get; set; } // FK
+        //public string DeliveryMethodId { get; set; } = null!; // FK
         public DeliveryMethodDTO DeliveryMethod { get; set; } = null!; 
         public ICollection<OrderItemDTO> Items { get; set; } = new HashSet<OrderItemDTO>(); 
         public decimal Subtotal { get; set; }

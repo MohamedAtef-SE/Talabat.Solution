@@ -6,9 +6,7 @@ namespace Talabat.Core.Application.Abstractions.DTOModels.Auth
     {
         [Required]
         public required string DisplayName { get; set; }
-        [Required]
-        public required string UserName { get; set; }
-
+        
         [Required]
         [EmailAddress]
         public required string Email { get; set; }
@@ -18,9 +16,6 @@ namespace Talabat.Core.Application.Abstractions.DTOModels.Auth
             ErrorMessage = "Password must have 1 Uppercase, 1 Lowercase, 1 number, 1 non alphanumeric and at least 6 characters.")]
         public required string Password { get; set; }
         
-        [Required]
-        [Compare(nameof(Password),ErrorMessage = "not confirmed password.")]
-        public required string ConfirmedPassword { get; set; }
         [Phone]
         public string? PhoneNumber { get; set; }
     }

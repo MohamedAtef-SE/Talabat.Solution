@@ -28,22 +28,22 @@ namespace Talabat.APIs.Controllers.Controllers
             return userDTO is not null ? Ok(userDTO) : Conflict(new APIErrorResponse(409,"Email is already exist"));
         }
 
-        [HttpPost("SignIn")]
-        public async Task<ActionResult<UserDTO>> SignIn(SignInDTO signInDTO)
+        [HttpPost("login")]
+        public async Task<ActionResult<UserDTO>> LoginAsync(SignInDTO signInDTO)
         {
             var userDTO = await _authService.Login(signInDTO);
             
             return Ok(userDTO);
         }
 
-        [HttpGet("GetUser")]
+        [HttpGet]
         [Authorize]
         public async Task<UserDTO> GetCurrentUser()
         {
            return await _authService.GetCurrentUser();
         }
 
-        [HttpGet("UserAddress")]
+        [HttpGet("Address")]
         [Authorize]
         public async Task<ActionResult<AddressDTO>> GetUserAddress()
         {
@@ -52,11 +52,18 @@ namespace Talabat.APIs.Controllers.Controllers
         }
 
 
-        [HttpPut("ChangeUserAddress")]
+        [HttpPut("Address")]
         [Authorize]
-        public async Task<ActionResult<AddressDTO>> UpadateUserAddress(AddressDTO addressDTO)
+        public async Task<ActionResult<AddressDTO>> UpdateUserAddress(AddressDTO addressDTO)
         {
             return await _authService.UpdateAddress(User, addressDTO);
+        }
+
+        [HttpGet("emailexists")]
+        public async Task<ActionResult<bool>> CheckEmailExists(string email)
+        {
+            var existed =await _authService.checkEmailExists(email);
+            return Ok(existed);
         }
 
     }

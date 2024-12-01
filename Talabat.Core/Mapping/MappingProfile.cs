@@ -40,8 +40,8 @@ namespace Talabat.Core.Application.Mapping
 
             CreateMap<Domain.Entities.Identity.Address, AddressDTO>().ReverseMap();
 
-            CreateMap<CustomerBasketDTO, CustomerBasket>();
-            CreateMap<BasketItemDTO, BasketItem>();
+            CreateMap<BasketItemDTO, BasketItem>().ReverseMap();
+            CreateMap<CustomerBasketDTO, CustomerBasket>().ReverseMap();
 
             CreateMap<OrderItemDTO, OrderItem>().ReverseMap();
             CreateMap<OrderedProductItemDTO, OrderedProductItem>().ReverseMap();

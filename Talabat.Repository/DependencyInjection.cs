@@ -31,7 +31,7 @@ namespace Talabat.Infrastructure.Persistence
             services.AddSingleton<IConnectionMultiplexer>(_ =>
             {
                 var connection = configuration.GetConnectionString("RedisConnection");
-
+                if (connection is null) throw new Exception("Check Redis-server...");
                 return ConnectionMultiplexer.Connect(connection!);
             });
 
