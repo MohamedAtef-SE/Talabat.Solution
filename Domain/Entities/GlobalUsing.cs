@@ -1,0 +1,1 @@
+﻿global using Talabat.Core.Domain.Entities._Common;

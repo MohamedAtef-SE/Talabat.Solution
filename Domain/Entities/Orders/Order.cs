@@ -1,19 +1,18 @@
-﻿using Talabat.Core.Domain.Entities.Products;
-
-namespace Talabat.Core.Domain.Entities.Orders
+﻿namespace Talabat.Core.Domain.Entities.Orders
 {
-    public class Order : BaseEntity
+    public class Order : BaseAuditableEntity<string>
     {
         // Parameterless Constructor For EF Core
         public Order() { }
 
-        public Order(string buyerEmail, Address shippingAddress, string deliveryMethodId, ICollection<OrderItem> items, decimal subtotal)
+        public Order(string buyerEmail, Address shippingAddress, string deliveryMethodId, ICollection<OrderItem> items, decimal subtotal, string paymentIntentId)
         {
             BuyerEmail = buyerEmail;
             ShippingAddress = shippingAddress;
             DeliveryMethodId = deliveryMethodId;
             Items = items;
             Subtotal = subtotal;
+            PaymentIntentId = paymentIntentId;
         }
 
         public string BuyerEmail { get; set; } = null!;
@@ -29,6 +28,6 @@ namespace Talabat.Core.Domain.Entities.Orders
         //public decimal Total => Subtotal + DeliveryMethod.Cost;
         // OR use Getter Method
         public decimal GetTotal() => DeliveryMethod.Cost + Subtotal;
-        public string PaymentIntentId { get; set; } = string.Empty;
+        public string PaymentIntentId { get; set; }
     }
 }

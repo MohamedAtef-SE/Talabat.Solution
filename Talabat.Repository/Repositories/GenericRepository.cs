@@ -1,14 +1,14 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Talabat.Core.Domain.Contracts;
-using Talabat.Core.Domain.Entities.Products;
+using Talabat.Core.Domain.Entities._Common;
 using Talabat.Infrastructure.Persistence.Data;
 
 namespace Talabat.Infrastructure.Persistence.Repositories
 {
-    public class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEntity : BaseEntity
+    public class GenericRepository<TEntity,TKey> : IGenericRepository<TEntity,TKey> where TEntity : BaseAuditableEntity<TKey> where TKey : IEquatable<TKey>
     {
         private readonly StoreContext _dbContext;
-
+       
         public GenericRepository(StoreContext dbContext)
         {
             _dbContext = dbContext;
@@ -18,24 +18,19 @@ namespace Talabat.Infrastructure.Persistence.Repositories
             return await _dbContext.Set<TEntity>().ToListAsync();
         }
 
-        public async Task<IReadOnlyList<TEntity>> GetAllWithSpecAsync(ISpecifications<TEntity> specs)
+        public async Task<IReadOnlyList<TEntity>> GetAllWithSpecAsync(ISpecifications<TEntity,TKey> specs)
         {
-            return await SpecificationBuilder<TEntity>.GetQuery(_dbContext.Set<TEntity>(),specs).ToListAsync();
+            return await SpecificationBuilder<TEntity,TKey>.GetQuery(_dbContext.Set<TEntity>(),specs).ToListAsync();
         }
 
-        public async Task<TEntity?> GetAsync(string id)
+        public async Task<TEntity?> GetAsync(TKey id)
         {
-            //// Before using Specification DP
-            //if (typeof(TEntity).Name == typeof(Product).Name)
-            //{
-            //    return  await _dbContext.Product.Include(P => P.Brand).Include(P => P.Category).FirstOrDefaultAsync(P => P.Id.Equals(id)) as TEntity;
-            //}
             return await _dbContext.Set<TEntity>().FindAsync(id);
         }
 
-        public async Task<TEntity?> GetWithSpecAsync(ISpecifications<TEntity> specs)
+        public async Task<TEntity?> GetWithSpecAsync(ISpecifications<TEntity,TKey> specs)
         {
-            return await SpecificationBuilder<TEntity>.GetQuery(_dbContext.Set<TEntity>(),specs).FirstOrDefaultAsync();
+            return await SpecificationBuilder<TEntity,TKey>.GetQuery(_dbContext.Set<TEntity>(),specs).FirstOrDefaultAsync();
         }
 
         public async Task<bool> AddAsync(TEntity entity)
@@ -58,5 +53,6 @@ namespace Talabat.Infrastructure.Persistence.Repositories
             var result = _dbContext.Set<TEntity>().Remove(entity);
             return result.State is EntityState.Deleted;
         }
+
     }
 }

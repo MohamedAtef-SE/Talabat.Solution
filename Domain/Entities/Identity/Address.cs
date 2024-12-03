@@ -2,7 +2,7 @@
 {
     public class Address
     {
-        public string Id { get; set; }
+        public string Id { get; set; } = null!;
         public required string FirstName { get; set; }
         public string? LastName { get; set; }
         public required string City { get; set; }

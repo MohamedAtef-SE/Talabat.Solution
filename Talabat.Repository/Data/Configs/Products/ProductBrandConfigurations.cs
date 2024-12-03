@@ -4,7 +4,7 @@ using Talabat.Core.Domain.Entities.Products;
 
 namespace Talabat.Infrastructure.Persistence.Data.Configs.Products
 {
-    internal class ProductBrandConfigurations : BaseConfigurations<ProductBrand>
+    internal class ProductBrandConfigurations : BaseConfigurations<ProductBrand,string>
     {
         public override void Configure(EntityTypeBuilder<ProductBrand> builder)
         {

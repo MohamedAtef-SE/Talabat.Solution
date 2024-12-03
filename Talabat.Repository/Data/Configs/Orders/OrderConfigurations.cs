@@ -4,7 +4,7 @@ using Talabat.Core.Domain.Entities.Orders;
 
 namespace Talabat.Infrastructure.Persistence.Data.Configs.Orders
 {
-    internal class OrderConfigurations : BaseConfigurations<Order>
+    internal class OrderConfigurations : BaseConfigurations<Order,string>
     {
         public override void Configure(EntityTypeBuilder<Order> builder)
         {

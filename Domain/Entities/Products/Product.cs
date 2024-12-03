@@ -1,6 +1,6 @@
 ﻿namespace Talabat.Core.Domain.Entities.Products
 {
-    public  class Product : BaseEntity
+    public  class Product : BaseAuditableEntity<string>
     {
         public required string Name { get; set; }
         public string Description { get; set; } = null!;

@@ -38,11 +38,11 @@ namespace Talabat.APIs.Extensions
                 }
 
                 // Uplaod DataSeeds after Updating Database.
-                await contextSeed.UploadDataSeeds<ProductCategory>("categories.json");
-                await contextSeed.UploadDataSeeds<ProductBrand>("brands.json");
-                await contextSeed.UploadDataSeeds<Product>("products.json");
+                await contextSeed.UploadDataSeeds<ProductCategory,string>("categories.json");
+                await contextSeed.UploadDataSeeds<ProductBrand,string>("brands.json");
+                //await contextSeed.UploadDataSeeds<Product,string>("products.json");
 
-                await contextSeed.UploadDataSeeds<DeliveryMethod>("deliveryMethods.json");
+                await contextSeed.UploadDataSeeds<DeliveryMethod,string>("deliveryMethods.json");
 
                 //Uplaod IdentitySeeds
                 await identitySeed.UploadUsersAsync();

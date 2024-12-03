@@ -1,10 +1,10 @@
 ﻿using System.Linq.Expressions;
 using Talabat.Core.Domain.Contracts;
-using Talabat.Core.Domain.Entities.Products;
+using Talabat.Core.Domain.Entities._Common;
 
-namespace Talabat.Core.Specifications
+namespace Talabat.Core.Application.Specifications
 {
-    public class BaseSpecifications<TEntity> : ISpecifications<TEntity> where TEntity : BaseEntity
+    public class BaseSpecifications<TEntity,TKey> : ISpecifications<TEntity,TKey> where TEntity : BaseAuditableEntity<TKey> where TKey : IEquatable<TKey>
     {
         public Expression<Func<TEntity, bool>> Criteria { get; }
         public List<Expression<Func<TEntity, object>>> Includes { get; } = new List<Expression<Func<TEntity, object>>>();

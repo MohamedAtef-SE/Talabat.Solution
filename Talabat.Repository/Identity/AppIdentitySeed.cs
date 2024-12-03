@@ -16,7 +16,7 @@ namespace Talabat.Infrastructure.Persistence.Identity
         {
             if (!_userManager.Users.Any())
             {
-                var UsersAsJson = File.ReadAllText("../Talabat.Repository/Identity/Seeds/users.json");
+                var UsersAsJson = File.ReadAllText("../Talabat.Infrastructure.Persistence/Identity/Seeds/users.json");
 
                 var users = JsonSerializer.Deserialize<List<ApplicationUser>>(UsersAsJson);
 

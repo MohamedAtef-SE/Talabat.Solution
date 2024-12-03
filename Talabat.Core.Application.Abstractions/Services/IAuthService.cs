@@ -1,6 +1,6 @@
 ﻿using System.Security.Claims;
-using Talabat.Core.Application.Abstractions.DTOModels;
-using Talabat.Core.Application.Abstractions.DTOModels.Auth;
+using Talabat.Shared.DTOModels._Common;
+using Talabat.Shared.DTOModels.Auth;
 
 namespace Talabat.Core.Application.Abstractions.Services
 {
@@ -11,5 +11,6 @@ namespace Talabat.Core.Application.Abstractions.Services
         Task<UserDTO> GetCurrentUser();
         Task<AddressDTO> GetUserAddressAsync(ClaimsPrincipal User);
         Task<AddressDTO> UpdateAddress(ClaimsPrincipal User, AddressDTO addressDTO);
+        Task<bool> checkEmailExists(string email);
     }
 }

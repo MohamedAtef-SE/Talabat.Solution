@@ -1,56 +1,39 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Talabat.Core.Application.Abstractions.DTOModels.Basket;
-using Talabat.Core.Application.Abstractions.Errors;
-using Talabat.Core.Domain.Contracts;
-using Talabat.Core.Domain.Entities.Basket;
+using Talabat.Core.Application.Abstractions.Services;
+using Talabat.Shared.DTOModels.Basket;
+using Talabat.Shared.Errors;
 
 
 namespace Talabat.APIs.Controllers.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class BasketController : ControllerBase
+    public class BasketController(IBasketService _basketService) : ControllerBase
     {
-        private readonly IBasketRepository _basketRepository;
-
-        public BasketController(IBasketRepository basketRepository)
-        {
-            _basketRepository = basketRepository;
-        }
-
         [HttpGet]
-        public async Task<ActionResult<CustomerBasket>> GetCustomerBasket([FromQuery]string? id)
+        public async Task<ActionResult<CustomerBasketDTO>> GetCustomerBasket([FromQuery] string id)
         {
-            if (id is null) return BadRequest(new APIErrorResponse(400));
+            var result = await _basketService.GetCustomerBasketAsync(id);
 
-            var basket = await _basketRepository.GetBasketAsync(id);
-
-            return basket is null ? new CustomerBasket(id) : basket;
-
+            return result is not null ? Ok(result) : BadRequest(new APIErrorResponse(400, "Issues found while getting customer basket..."));
         }
-
 
         [HttpPost]
         [Authorize]
-        public async Task<ActionResult<CustomerBasket>> UpdateBasket(CustomerBasketDTO customerBasket)
+        public async Task<ActionResult<CustomerBasketDTO>> UpdateBasket(CustomerBasketDTO customerBasket)
         {
-            var basket = await _basketRepository.UpdateBasketAsync(customerBasket);
+            var result = await _basketService.UpdateBasketAsync(customerBasket);
 
-            if(basket is null) return BadRequest(new APIErrorResponse(400));
-
-            return Ok(basket);
+            return result is not null ? Ok(result) : BadRequest(new APIErrorResponse(400, "Issues found while updating customer basket..."));
         }
 
-
         [HttpDelete]
-        public async Task<ActionResult<bool>> DeleteBasket(string? basketId)
+        public async Task<ActionResult> DeleteBasket(string basketId)
         {
+            var result = await _basketService.DeleteBasketAsync(basketId);
 
-            if (basketId is null) return BadRequest(new APIErrorResponse(400));
-           var isDeleted = await _basketRepository.DeleteBasketAsync(basketId);
-            return isDeleted ? Ok(new { message = "Deleted Successfully", StatusCode = 200 }) : NotFound(new APIErrorResponse(404,"Something went wrong 😥")); 
-
+            return result is not false ? Ok(new { message = "Deleted successfully 🤝"}) : BadRequest(new APIErrorResponse(400, "Issues found while deleting customer basket..."));
         }
     }
 }

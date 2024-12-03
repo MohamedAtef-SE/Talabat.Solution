@@ -1,9 +1,11 @@
 ﻿using Talabat.Core.Domain.Entities.Products;
+using Talabat.Shared.DTOModels.Products;
 
-namespace Talabat.Core.Specifications.Products
+namespace Talabat.Core.Application.Specifications.Products
 {
-    public class ProductWithBrandAndCategorySpecifications : BaseSpecifications<Product>
+    public class ProductWithBrandAndCategorySpecifications : BaseSpecifications<Product,string>
     {
+
         public ProductWithBrandAndCategorySpecifications(ProductSpecParams specParams)
             : base(
                   P => (!specParams.BrandId.HasValue || P.ProductBrandId.Equals(specParams.BrandId.Value))
