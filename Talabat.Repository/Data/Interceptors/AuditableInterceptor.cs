@@ -33,8 +33,6 @@ namespace Talabat.Infrastructure.Persistence.Data.Interceptors
 
             var userId = _loggedInUserService.UserId;
 
-            if (userId == null) return;
-
             DateTimeOffset date = DateTimeOffset.UtcNow;
 
             var entries = dbContext.ChangeTracker.Entries<IBaseAuditableEntity>()
@@ -44,10 +42,10 @@ namespace Talabat.Infrastructure.Persistence.Data.Interceptors
             {
                 if (entry.State is EntityState.Added)
                 {
-                    entry.Entity.CreatedBy = userId;
+                    entry.Entity.CreatedBy = userId ?? "N/A";
                     entry.Entity.CreatedOn = date;
                 }
-                entry.Entity.lastModifedBy = userId;
+                entry.Entity.lastModifedBy = userId ?? "N/A";
                 entry.Entity.lastModifedOn = date;
             }
         }

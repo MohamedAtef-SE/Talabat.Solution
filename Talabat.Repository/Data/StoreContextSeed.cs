@@ -1,8 +1,8 @@
 ﻿using System.Text.Json;
 using Talabat.Core.Domain.Entities._Common;
-using Talabat.Infrastructure.Persistence.Data;
+using Talabat.Shared.Exceptions;
 
-namespace Talabat.Repository.Data
+namespace Talabat.Infrastructure.Persistence.Data
 {
     public class StoreContextSeed
     {
@@ -17,12 +17,12 @@ namespace Talabat.Repository.Data
         {
             if (!_dbContext.Set<TEntity>().Any())
             {
-                var filePath = Path.Combine("../Talabat.Infrastructure.Persistence", "Data","DataSeeds", fileName);
+                var filePath = Path.Combine("../Talabat.Repository", "Data","DataSeeds", fileName);
 
                 if (File.Exists(filePath))
                 {
-                    var datasAsJSON = await File.ReadAllTextAsync(filePath);
-                    var data = JsonSerializer.Deserialize<List<TEntity>>(datasAsJSON);
+                    var SerializedData = await File.ReadAllTextAsync(filePath);
+                    var data = JsonSerializer.Deserialize<List<TEntity>>(SerializedData);
 
                     if (data?.Count > 0)
                     {
@@ -31,6 +31,10 @@ namespace Talabat.Repository.Data
                         await _dbContext.SaveChangesAsync();
                     }
 
+                }
+                else
+                {
+                    throw new NotFoundException($"Incorrect path found < {Path.GetFullPath(filePath)} >");
                 }
             }
 

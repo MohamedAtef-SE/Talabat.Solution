@@ -3,8 +3,6 @@ using Talabat.Core.Domain.Entities.Orders;
 using Talabat.Core.Domain.Entities.Products;
 using Talabat.Infrastructure.Persistence.Data;
 using Talabat.Infrastructure.Persistence.Identity;
-using Talabat.Repository.Data;
-using Talabat.Repository.Identity;
 
 namespace Talabat.APIs.Extensions
 {
@@ -38,11 +36,11 @@ namespace Talabat.APIs.Extensions
                 }
 
                 // Uplaod DataSeeds after Updating Database.
-                await contextSeed.UploadDataSeeds<ProductCategory,string>("categories.json");
-                await contextSeed.UploadDataSeeds<ProductBrand,string>("brands.json");
+                //await contextSeed.UploadDataSeeds<ProductCategory,string>("categories.json");
+                //await contextSeed.UploadDataSeeds<ProductBrand,string>("brands.json");
                 //await contextSeed.UploadDataSeeds<Product,string>("products.json");
 
-                await contextSeed.UploadDataSeeds<DeliveryMethod,string>("deliveryMethods.json");
+                //await contextSeed.UploadDataSeeds<DeliveryMethod,string>("deliveryMethods.json");
 
                 //Uplaod IdentitySeeds
                 await identitySeed.UploadUsersAsync();

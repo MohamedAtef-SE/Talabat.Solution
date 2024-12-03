@@ -2,7 +2,6 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Talabat.Core.Domain.Entities.Identity;
 using Talabat.Infrastructure.Persistence._Common;
-using Talabat.Repository.Identity;
 
 namespace Talabat.Infrastructure.Persistence.Identity.Config
 {

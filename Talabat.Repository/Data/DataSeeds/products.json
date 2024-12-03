@@ -5,6 +5,8 @@
     "Description": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna.",
     "Price": 200,
     "PictureUrl": "images/products/sb-ang1.png",
+    "Category": "Frappuccino",
+    "Brand": "Starbucks",
     "ProductCategoryId": null,
     "ProductBrandId": null
   },
@@ -14,6 +16,8 @@
     "Description": "Nunc viverra imperdiet enim. Fusce est. Vivamus a tellus.",
     "Price": 150,
     "PictureUrl": "images/products/sb-ang2.png",
+    "Category": "Frappuccino",
+    "Brand": "Costa",
     "ProductCategoryId": null,
     "ProductBrandId": null
   },
@@ -23,6 +27,8 @@
     "Description": "Suspendisse dui purus, scelerisque at, vulputate vitae, pretium mattis, nunc. Mauris eget neque at sem venenatis eleifend. Ut nonummy.",
     "Price": 180,
     "PictureUrl": "images/products/sb-core1.png",
+    "Category": "Latte",
+    "Brand": "Starbucks",
     "ProductCategoryId": null,
     "ProductBrandId": null
   },
@@ -32,6 +38,8 @@
     "Description": "Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Proin pharetra nonummy pede. Mauris et orci.",
     "Price": 300,
     "PictureUrl": "images/products/sb-core2.png",
+    "Category": "Mocha",
+    "Brand": "Costa",
     "ProductCategoryId": null,
     "ProductBrandId": null
   },
@@ -41,6 +49,8 @@
     "Description": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna.",
     "Price": 250,
     "PictureUrl": "images/products/sb-react1.png",
+    "Category": "Macchiato",
+    "Brand": "On The Run",
     "ProductCategoryId": null,
     "ProductBrandId": null
   },
@@ -50,6 +60,8 @@
     "Description": "Aenean nec lorem. In porttitor. Donec laoreet nonummy augue.",
     "Price": 120,
     "PictureUrl": "images/products/sb-ts1.png",
+    "Category": "Macchiato",
+    "Brand": "TBS",
     "ProductCategoryId": null,
     "ProductBrandId": null
   },
@@ -59,6 +71,8 @@
     "Description": "Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna.",
     "Price": 10,
     "PictureUrl": "images/products/hat-core1.png",
+    "Category": "Latte",
+    "Brand": "TBS",
     "ProductCategoryId": null,
     "ProductBrandId": null
   },
@@ -68,6 +82,8 @@
     "Description": "Suspendisse dui purus, scelerisque at, vulputate vitae, pretium mattis, nunc. Mauris eget neque at sem venenatis eleifend. Ut nonummy.",
     "Price": 8,
     "PictureUrl": "images/products/hat-react1.png",
+    "Category": "Cake",
+    "Brand": "Caribou",
     "ProductCategoryId": null,
     "ProductBrandId": null
   },
@@ -77,6 +93,8 @@
     "Description": "Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna.",
     "Price": 15,
     "PictureUrl": "images/products/hat-react2.png",
+    "Category": "Cake",
+    "Brand": "Caribou",
     "ProductCategoryId": null,
     "ProductBrandId": null
   },
@@ -86,6 +104,8 @@
     "Description": "Nunc viverra imperdiet enim. Fusce est. Vivamus a tellus.",
     "Price": 18,
     "PictureUrl": "images/products/glove-code1.png",
+    "Category": "Donuts",
+    "Brand": "Krispy Kreme",
     "ProductCategoryId": null,
     "ProductBrandId": null
   },
@@ -95,6 +115,8 @@
     "Description": "Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Proin pharetra nonummy pede. Mauris et orci.",
     "Price": 15,
     "PictureUrl": "images/products/glove-code2.png",
+    "Category": "Salad",
+    "Brand": "On The Run",
     "ProductCategoryId": null,
     "ProductBrandId": null
   }

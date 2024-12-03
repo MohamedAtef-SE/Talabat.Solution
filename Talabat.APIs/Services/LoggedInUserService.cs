@@ -6,13 +6,14 @@ namespace Talabat.APIs.Services
 {
     public class LoggedInUserService : ILoggedInUserService
     {
+        private readonly IHttpContextAccessor? _httpContextAccessor;
+
         public string? UserId { get; }
         public LoggedInUserService(IHttpContextAccessor httpContextAccessor)
         {
-            if (httpContextAccessor is null)
-                throw new BadRequestException("an occurred error during access HttpContextAccessor");
-                
-               UserId = httpContextAccessor.HttpContext!.User.FindFirstValue(ClaimTypes.PrimarySid);
+            _httpContextAccessor = httpContextAccessor;
+
+            UserId = _httpContextAccessor?.HttpContext?.User.FindFirstValue(ClaimTypes.PrimarySid);
         }
     }
 }
