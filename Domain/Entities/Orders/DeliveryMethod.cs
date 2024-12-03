@@ -1,8 +1,6 @@
-﻿using Talabat.Core.Domain.Entities.Products;
-
-namespace Talabat.Core.Domain.Entities.Orders
+﻿namespace Talabat.Core.Domain.Entities.Orders
 {
-    public class DeliveryMethod : BaseEntity
+    public class DeliveryMethod : BaseAuditableEntity<string>
     {
         public required string ShortName { get; set; }
         public string Description { get; set; } = null!;

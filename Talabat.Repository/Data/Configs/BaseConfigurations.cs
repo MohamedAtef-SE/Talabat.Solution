@@ -1,14 +1,14 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Talabat.Core.Domain.Entities.Products;
+using Talabat.Core.Domain.Entities._Common;
 using Talabat.Infrastructure.Persistence._Common;
 using Talabat.Repository.Data;
 
 namespace Talabat.Infrastructure.Persistence.Data.Configs
 {
     [DBContextType(typeof(StoreContext))]
-    internal class BaseConfigurations<TEntity> : IEntityTypeConfiguration<TEntity>
-        where TEntity : BaseEntity
+    internal class BaseConfigurations<TEntity,TKey> : IEntityTypeConfiguration<TEntity>
+        where TEntity : BaseAuditableEntity<TKey> where TKey : IEquatable<TKey>
     {
         public virtual void Configure(EntityTypeBuilder<TEntity> builder)
         {

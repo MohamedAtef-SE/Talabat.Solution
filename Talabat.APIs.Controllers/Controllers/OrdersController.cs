@@ -1,37 +1,27 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
-using Talabat.Core.Application.Abstractions.DTOModels.Orders;
-using Talabat.Core.Application.Abstractions.Errors;
 using Talabat.Core.Application.Abstractions.Services;
+using Talabat.Shared.DTOModels.Orders;
+using Talabat.Shared.Errors;
 
 namespace Talabat.APIs.Controllers.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
     [Authorize]
-    public class OrdersController : ControllerBase
+    public class OrdersController(IServiceManager _serviceManager) : ControllerBase
     {
-        private readonly IOrderService _orderService;
-        public OrdersController(IOrderService orderService)
-        {
-            _orderService = orderService;
-        }
-
         [HttpPost]
         [ProducesResponseType(typeof(OrderDTO),StatusCodes.Status200OK)]
-        [ProducesResponseType(typeof(BadRequest),StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<OrderDTO?>> CreateOrder(CreateOrderDTO createOrder)
         {
             createOrder.BuyerEmail =  User.FindFirstValue(ClaimTypes.Email)!;
 
-            var order = await _orderService.CreateOrderAsync(createOrder);
+            var result = await _serviceManager.OrderService.CreateOrderAsync(createOrder);
 
-            if (order is null) return BadRequest(new APIErrorResponse(400,"Can't create this order."));
-
-            return Ok(order);
+            return result is not null ? Ok(result) : BadRequest(new APIErrorResponse(400, "Issues found while creating your order..."));
         }
 
         [HttpGet]
@@ -39,12 +29,13 @@ namespace Talabat.APIs.Controllers.Controllers
         public async Task<ActionResult<IReadOnlyList<OrderDTO>>> GetOrdersForUser()
         {
             var userEmail = User.FindFirstValue(ClaimTypes.Email);
-            var orders = await _orderService.GetOrdersForSpecificUserAsync(userEmail!);
+            if (userEmail == null) return BadRequest(new APIErrorResponse(400, "Something wrong!! email not exist"));
 
-            if (orders?.Count() == 0)
-                return NotFound(new APIErrorResponse(404, "no orders found."));  
-            
-            return Ok(orders);
+            var result = await _serviceManager.OrderService.GetOrdersForSpecificUserAsync(userEmail!);
+
+            return result is not null ? Ok(result) 
+                                        :
+                                       BadRequest(new APIErrorResponse(400, $"Issues found while getting {userEmail!.Split('@')[0]} orders."));
         }
 
         [HttpGet("{id}")]
@@ -52,18 +43,20 @@ namespace Talabat.APIs.Controllers.Controllers
         public async Task<ActionResult<OrderDTO>> getOrderDetailed(string id)
         {
             var userEmail = User.FindFirstValue(ClaimTypes.Email);
-            var order = await _orderService.GetOrderByIdAsync(userEmail,id);
+            if (userEmail == null) return BadRequest(new APIErrorResponse(400, "Something wrong!! email not exist"));
 
-            return Ok(order);
+            var result = await _serviceManager.OrderService.GetOrderByIdAsync(userEmail,id);
+
+            return result is not null ? Ok(result) : BadRequest(new APIErrorResponse(400, $"Issues found while getting {userEmail.Split('@')[0]} order details."));
         }
 
         [HttpGet("deliveryMethods")]
         [Authorize]
         public async Task<ActionResult<IReadOnlyList<DeliveryMethodDTO>>> GetDeliveryMethods()
         {
-            var deliveryMethods = await _orderService.GetAllDeliveryMethodsAsync();
-            if(deliveryMethods?.Count() == 0) return NotFound(new APIErrorResponse(404,"No delivery methods found."));
-            return Ok(deliveryMethods);
+            var result = await _serviceManager.OrderService.GetAllDeliveryMethodsAsync();
+
+            return result is not null ? Ok(result) : BadRequest(new APIErrorResponse(400, "Issues found while getting delivery methods..."));
         }
     }
 }

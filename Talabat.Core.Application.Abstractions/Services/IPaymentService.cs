@@ -1,5 +1,6 @@
-﻿using Talabat.Core.Application.Abstractions.DTOModels.Basket;
-using Talabat.Core.Application.Abstractions.DTOModels.Orders;
+﻿using Talabat.Shared.DTOModels.Basket;
+using Talabat.Shared.DTOModels.Orders;
+
 
 namespace Talabat.Core.Application.Abstractions.Services
 {

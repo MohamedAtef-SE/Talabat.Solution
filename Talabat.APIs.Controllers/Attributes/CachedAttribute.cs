@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Talabat.Core.Application.Abstractions.Services;
 
@@ -16,7 +15,7 @@ namespace Talabat.APIs.Controllers.Attributes
             var CasheKey = GenerateCachKeyFromRequest(context.HttpContext.Request);
             var CachedResponse = await _responseCacheServices.GetCachedResponseAsync(CasheKey);
 
-            if (!CachedResponse.IsNullOrEmpty())
+            if (!String.IsNullOrEmpty(CachedResponse))
             {
                 var contentResult = new ContentResult()
                 {

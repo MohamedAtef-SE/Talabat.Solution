@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.Extensions.Configuration;
-using Talabat.Core.Application.Abstractions.DTOModels;
 using Talabat.Core.Domain.Entities.Products;
+using Talabat.Shared.DTOModels.Products;
 
 namespace Talabat.Core.Application.Mapping
 {

@@ -7,10 +7,10 @@ namespace Talabat.Core.Domain.Entities.Orders
         [EnumMember(Value = "Pending")]
         Pending = 1,
 
-        [EnumMember(Value = "PaymentReceived")]
+        [EnumMember(Value = "Payment Received")]
         PaymentReceived = 2,
 
-        [EnumMember(Value = "PaymentFailed")]
+        [EnumMember(Value = "Payment Failed")]
         PaymentFailed = 3,
     }
 }

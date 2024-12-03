@@ -4,7 +4,7 @@ using Talabat.Core.Domain.Entities.Orders;
 
 namespace Talabat.Infrastructure.Persistence.Data.Configs.Orders
 {
-    internal class DeliveryMethodConfigurations : BaseConfigurations<DeliveryMethod>
+    internal class DeliveryMethodConfigurations : BaseConfigurations<DeliveryMethod,string>
     {
         public override void Configure(EntityTypeBuilder<DeliveryMethod> builder)
         {

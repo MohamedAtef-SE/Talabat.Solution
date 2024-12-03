@@ -1,8 +1,6 @@
-﻿using Talabat.Core.Domain.Entities.Products;
-
-namespace Talabat.Core.Domain.Entities.Orders
+﻿namespace Talabat.Core.Domain.Entities.Orders
 {
-    public class OrderItem : BaseEntity
+    public class OrderItem : BaseAuditableEntity<string>
     {
         // Parameterless Constructor For EF Core
         public OrderItem() { }

@@ -1,12 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Talabat.Core.Domain.Contracts;
-using Talabat.Core.Domain.Entities.Products;
+using Talabat.Core.Domain.Entities._Common;
 
 namespace Talabat.Infrastructure.Persistence.Repositories
 {
-    internal static class SpecificationBuilder<TEntity> where TEntity : BaseEntity
+    internal static class SpecificationBuilder<TEntity,TKey> where TEntity : BaseAuditableEntity<TKey> where TKey : IEquatable<TKey>
     {
-        public static IQueryable<TEntity> GetQuery(IQueryable<TEntity> DbSet,ISpecifications<TEntity> specs)
+        public static IQueryable<TEntity> GetQuery(IQueryable<TEntity> DbSet,ISpecifications<TEntity,TKey> specs)
         {
             var query = DbSet;
             

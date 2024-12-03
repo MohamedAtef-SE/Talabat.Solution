@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Talabat.Core.Application.Abstractions.Errors;
+using Talabat.Shared.Errors;
 
 namespace Talabat.APIs.Controllers.Controllers
 {
@@ -12,9 +12,11 @@ namespace Talabat.APIs.Controllers.Controllers
         {
             if(Code is 404)
                 return NotFound(new ApiExceptionResponse(Code));
+
             else if(Code is 401)
                 return Unauthorized(new ApiExceptionResponse(Code));
-            else return BadRequest(Code);
+
+            else return BadRequest(new ApiExceptionResponse(Code));
         }
     }
 }

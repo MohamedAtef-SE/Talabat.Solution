@@ -1,5 +1,5 @@
 ﻿using System.Text.Json;
-using Talabat.Core.Domain.Entities.Products;
+using Talabat.Core.Domain.Entities._Common;
 using Talabat.Infrastructure.Persistence.Data;
 
 namespace Talabat.Repository.Data
@@ -13,11 +13,11 @@ namespace Talabat.Repository.Data
             _dbContext = dbContext;
         }
 
-        public async Task UploadDataSeeds<TEntity>(string fileName) where TEntity : BaseEntity
+        public async Task UploadDataSeeds<TEntity,TKey>(string fileName) where TEntity : BaseAuditableEntity<TKey> where TKey : IEquatable<TKey>
         {
             if (!_dbContext.Set<TEntity>().Any())
             {
-                var filePath = Path.Combine("../Talabat.Repository","Data","DataSeeds", fileName);
+                var filePath = Path.Combine("../Talabat.Infrastructure.Persistence", "Data","DataSeeds", fileName);
 
                 if (File.Exists(filePath))
                 {

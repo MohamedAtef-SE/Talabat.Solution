@@ -1,10 +1,14 @@
 using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using Talabat.APIs.Extensions;
 using Talabat.APIs.Middlewares;
+using Talabat.APIs.Services;
 using Talabat.Core.Application;
-using Talabat.Core.Application.Abstractions.Errors;
+using Talabat.Core.Application.Abstractions.Services;
+using Talabat.Infrastructure;
 using Talabat.Infrastructure.Persistence;
+using Talabat.Shared.Errors;
 
 namespace Talabat.APIs
 {
@@ -19,12 +23,15 @@ namespace Talabat.APIs
             // Add services to the container.
 
             builder.Services.AddControllers()
+                 .AddNewtonsoftJson(options =>
+                 {
+                     options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+                 })
                             .ConfigureApiBehaviorOptions(O =>
             {
                 O.SuppressModelStateInvalidFilter = false; // Default
                 O.InvalidModelStateResponseFactory = actionContext =>
                 {
-
                     // ModelState is a Dic [KeyValuePear]
                     // Key Name Of Param
 
@@ -38,12 +45,11 @@ namespace Talabat.APIs
 
                 };
 
-            })
-                            .AddApplicationPart(typeof(Controllers.AssemblyInformation).Assembly);
+            }).AddApplicationPart(typeof(Controllers.AssemblyInformation).Assembly);
 
-            builder.Services.AddCors(CorsOptions => 
+            builder.Services.AddCors(CorsOptions =>
             {
-                CorsOptions.AddPolicy("TalabatPolicy", configurePolicy => 
+                CorsOptions.AddPolicy("TalabatPolicy", configurePolicy =>
                 {
                     configurePolicy.AllowAnyHeader();
                     configurePolicy.AllowAnyMethod();
@@ -59,6 +65,10 @@ namespace Talabat.APIs
 
             #endregion
 
+            builder.Services.AddHttpContextAccessor();
+            builder.Services.AddScoped<ILoggedInUserService, LoggedInUserService>();
+
+
             #region AddCustomServices
 
             builder.Services.AddRepositoryServices(builder.Configuration);
@@ -66,6 +76,8 @@ namespace Talabat.APIs
             builder.Services.AddIdentityServices(builder.Configuration);
 
             builder.Services.AddApplicationServices(builder.Configuration);
+
+            builder.Services.AddInfrastructureServices();
 
             #endregion
 

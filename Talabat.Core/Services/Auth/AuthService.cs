@@ -6,14 +6,15 @@ using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using Talabat.Core.Application.Abstractions.DTOModels;
-using Talabat.Core.Application.Abstractions.DTOModels.Auth;
 using Talabat.Core.Application.Abstractions.Services;
 using Talabat.Core.Domain.Entities.Identity;
+using Talabat.Shared.DTOModels._Common;
+using Talabat.Shared.DTOModels.Auth;
+using Talabat.Shared.Exceptions;
 
 namespace Talabat.Core.Application.Services.Auth
 {
-    public class AuthService : IAuthService
+    internal class AuthService : IAuthService
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
@@ -37,7 +38,8 @@ namespace Talabat.Core.Application.Services.Auth
 
             var userFound = await _userManager.FindByEmailAsync(registerDTO.Email);
 
-            if (userFound is { }) return null;
+            if (userFound is { }) 
+                throw new BadRequestException("this email is already exist");
 
             var newUser = new ApplicationUser()
             {
@@ -48,6 +50,9 @@ namespace Talabat.Core.Application.Services.Auth
             };
             var result = await _userManager.CreateAsync(newUser, registerDTO.Password);
 
+            if (!result.Succeeded)
+                throw new BadRequestException("while registeration failed to create new user");
+
             var userDTO = new UserDTO()
             {
                 DisplayName = registerDTO.DisplayName,
@@ -57,11 +62,19 @@ namespace Talabat.Core.Application.Services.Auth
 
             return userDTO;
         }
+
         public async Task<UserDTO> Login(SignInDTO signInDTO)
         {
             var user = await _userManager.FindByEmailAsync(signInDTO.Email);
 
+            if (user is null)
+                throw new NotFoundException("Invalid login");
+
             var userStatus = await _signInManager.CheckPasswordSignInAsync(user, signInDTO.Password, false);
+
+            if (userStatus.IsLockedOut) throw new BadRequestException("Locked-out user, try again later");
+            if (userStatus.IsNotAllowed) throw new BadRequestException("Access not allowed");
+            if (!userStatus.Succeeded) throw new BadRequestException("Invalid login");
 
             var userDTO = new UserDTO()
             {
@@ -71,11 +84,17 @@ namespace Talabat.Core.Application.Services.Auth
             };
             return userDTO;
         }
+
         public async Task<UserDTO> GetCurrentUser()
         {
             var email = _httpContextAccessor.HttpContext!.User.FindFirstValue(ClaimTypes.Email);
+            if(string.IsNullOrEmpty(email))
+                throw new BadRequestException("while getting current user, can't fetch his email address");
 
             var user = await _userManager.FindByEmailAsync(email);
+
+            if (user is null)
+                throw new NotFoundException($"failed to get current user.");
 
             return new UserDTO()
             {
@@ -84,38 +103,53 @@ namespace Talabat.Core.Application.Services.Auth
                 Token = await GenerateTokenAsync(user)
             };
         }
+
         public async Task<AddressDTO> UpdateAddress(ClaimsPrincipal User, AddressDTO addressDTO)
         {
             var user = await _userManager.GetUserWithAdressAsync(User);
 
+            if (user is not { })
+                throw new BadRequestException($"an occurred error during getting user with its address");
+
             addressDTO.Id = user.Address?.Id ?? null;
 
             var mappedAddress = _mapper.Map<AddressDTO,Address>(addressDTO);
+
+            if (mappedAddress is null)
+                throw new BadRequestException($"mapping address failed.");
 
             user.Address = mappedAddress;
 
             var result = await _userManager.UpdateAsync(user);
 
             if (!result.Succeeded)
-                throw new Exception("Address failed to updated.");
+                throw new BadRequestException("Updating address failed.");
 
             return addressDTO;
 
         }
+
         public async Task<AddressDTO> GetUserAddressAsync(ClaimsPrincipal User)
         {
-            var email = User.FindFirstValue(ClaimTypes.Email);
-
             var user = await _userManager.GetUserWithAdressAsync(User);
 
-            var MappedAddress = _mapper.Map<Address, AddressDTO>(user.Address);
+            var mappedAddress = _mapper.Map<Address, AddressDTO>(user.Address);
 
-            return MappedAddress;
+            if (mappedAddress is null)
+                throw new BadRequestException($"mapping address failed.");
+
+            return mappedAddress;
         }
+
+        public async Task<bool> checkEmailExists(string email)
+        {
+            return await _userManager.FindByEmailAsync(email) is not null;
+        }
+
         private async Task<string> GenerateTokenAsync(ApplicationUser user)
         {
             var userRoles = await _userManager.GetRolesAsync(user);
-
+            
             var privateClaims = new List<Claim>()
             {
                 new Claim(ClaimTypes.PrimarySid, user.Id),
@@ -138,9 +172,6 @@ namespace Talabat.Core.Application.Services.Auth
 
             return new JwtSecurityTokenHandler().WriteToken(Token);
         }
-        public async Task<bool> checkEmailExists(string email)
-        {
-            return await _userManager.FindByEmailAsync(email) is not null;
-        }
+       
     }
 }

@@ -1,24 +1,24 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Stripe;
-using Talabat.Core.Application.Abstractions.DTOModels.Basket;
-using Talabat.Core.Application.Abstractions.DTOModels.Orders;
-using Talabat.Core.Application.Abstractions.Errors;
 using Talabat.Core.Application.Abstractions.Services;
+using Talabat.Shared.DTOModels.Basket;
+using Talabat.Shared.DTOModels.Orders;
+using Talabat.Shared.Errors;
 
 namespace Talabat.APIs.Controllers.Controllers
 {
     [Route("api/{controller}")]
     [ApiController]
-    public class PaymentsController(IPaymentService _paymentService) : ControllerBase
+    public class PaymentsController(IServiceManager _serviceMaanger) : ControllerBase
     {
         [HttpPost("{basketId}")]
         [Authorize]
         public async Task<ActionResult<CustomerBasketDTO>> CreateOrUpdatePaymentIntentEndPoint(string basketId)
         {
-            var customerBasket = await _paymentService.CreateOrUpdatePaymentIntentAsync(basketId);
-            if (customerBasket is null) return BadRequest(new APIErrorResponse(400, "Issues found while creating your basket..."));
-            return Ok(customerBasket);
+            var result = await _serviceMaanger.PaymentService.CreateOrUpdatePaymentIntentAsync(basketId);
+            
+            return result is not null ? Ok(result) : BadRequest(new APIErrorResponse(400, "Issues found while creating your basket..."));
         }
 
         [HttpPost("webhook")]
@@ -26,6 +26,7 @@ namespace Talabat.APIs.Controllers.Controllers
         {
             var json = await new StreamReader(HttpContext.Request.Body).ReadToEndAsync();
             const string endpointSecret = "whsec_58abc1f44bfe37f5c9e40db89cc7708398e3961ee7c2f062036ac04bac6c1067";
+
             try
             {
                 var stripeEvent = EventUtility.ParseEvent(json);
@@ -42,7 +43,7 @@ namespace Talabat.APIs.Controllers.Controllers
               
                     // Then define and call a method to handle the successful payment intent.
                     // handlePaymentIntentSucceeded(paymentIntent);
-                   orderDTO = await _paymentService.UpdatePaymentIntentToSucceedOrFailed(paymentIntent.Id, true);
+                   orderDTO = await _serviceMaanger.PaymentService.UpdatePaymentIntentToSucceedOrFailed(paymentIntent.Id, true);
                 }
                 else if (stripeEvent.Type == EventTypes.PaymentIntentPaymentFailed)
                 {
@@ -50,7 +51,7 @@ namespace Talabat.APIs.Controllers.Controllers
 
                     // Then define and call a method to handle the failed payment intent.
                     // handlePaymentIntentFailed(paymentIntent);
-                    orderDTO = await _paymentService.UpdatePaymentIntentToSucceedOrFailed(paymentIntent.Id, false); 
+                    orderDTO = await _serviceMaanger.PaymentService.UpdatePaymentIntentToSucceedOrFailed(paymentIntent.Id, false); 
                 }
                 
                 return Ok(orderDTO);

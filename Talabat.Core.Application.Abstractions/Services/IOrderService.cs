@@ -1,4 +1,5 @@
-﻿using Talabat.Core.Application.Abstractions.DTOModels.Orders;
+﻿
+using Talabat.Shared.DTOModels.Orders;
 
 namespace Talabat.Core.Application.Abstractions.Services
 {

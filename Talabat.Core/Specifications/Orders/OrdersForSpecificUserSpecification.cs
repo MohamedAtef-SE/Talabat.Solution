@@ -1,9 +1,8 @@
 ﻿using Talabat.Core.Domain.Entities.Orders;
-using Talabat.Core.Specifications;
 
 namespace Talabat.Core.Application.Specifications.Orders
 {
-    public class OrdersForSpecificUserSpecification : BaseSpecifications<Order>
+    public class OrdersForSpecificUserSpecification : BaseSpecifications<Order,string>
     {
         public OrdersForSpecificUserSpecification(string BuyerEmail) : base(O => O.BuyerEmail.Equals(BuyerEmail))
         {

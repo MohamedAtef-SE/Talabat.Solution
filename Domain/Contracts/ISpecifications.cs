@@ -1,9 +1,8 @@
 ﻿using System.Linq.Expressions;
-using Talabat.Core.Domain.Entities.Products;
 
 namespace Talabat.Core.Domain.Contracts
 {
-    public interface ISpecifications<TEntity> where TEntity : BaseEntity
+    public interface ISpecifications<TEntity,TKey> where TEntity : BaseAuditableEntity<TKey> where TKey : IEquatable<TKey>
     {
         public Expression<Func<TEntity, bool>> Criteria { get; }
         public List<Expression<Func<TEntity, object>>> Includes { get; }
