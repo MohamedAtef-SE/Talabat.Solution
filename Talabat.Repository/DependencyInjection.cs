@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using StackExchange.Redis;
@@ -7,9 +6,7 @@ using Talabat.Core.Domain.Contracts;
 using Talabat.Infrastructure.Persistence.Data;
 using Talabat.Infrastructure.Persistence.Data.Interceptors;
 using Talabat.Infrastructure.Persistence.Identity;
-using Talabat.Infrastructure.Persistence.Repositories;
 using Talabat.Infrastructure.Redis.Basket;
-using Talabat.Repository.Data;
 
 namespace Talabat.Infrastructure.Persistence
 {

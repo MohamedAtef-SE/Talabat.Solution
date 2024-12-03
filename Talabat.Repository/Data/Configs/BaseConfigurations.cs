@@ -2,7 +2,6 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Talabat.Core.Domain.Entities._Common;
 using Talabat.Infrastructure.Persistence._Common;
-using Talabat.Repository.Data;
 
 namespace Talabat.Infrastructure.Persistence.Data.Configs
 {
