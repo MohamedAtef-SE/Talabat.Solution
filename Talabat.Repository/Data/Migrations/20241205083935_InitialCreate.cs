@@ -19,7 +19,11 @@ namespace Talabat.Infrastructure.Persistence.Data.Migrations
                     ShortName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     DeliveryTime = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Cost = table.Column<decimal>(type: "decimal(9,2)", nullable: false)
+                    Cost = table.Column<decimal>(type: "decimal(9,2)", nullable: false),
+                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CreatedOn = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
+                    lastModifedBy = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    lastModifedOn = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -31,7 +35,11 @@ namespace Talabat.Infrastructure.Persistence.Data.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CreatedOn = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
+                    lastModifedBy = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    lastModifedOn = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -43,7 +51,11 @@ namespace Talabat.Infrastructure.Persistence.Data.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CreatedOn = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
+                    lastModifedBy = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    lastModifedOn = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -65,7 +77,11 @@ namespace Talabat.Infrastructure.Persistence.Data.Migrations
                     ShippingAddress_Country = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     DeliveryMethodId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Subtotal = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    PaymentIntentId = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    PaymentIntentId = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CreatedOn = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
+                    lastModifedBy = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    lastModifedOn = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -87,7 +103,11 @@ namespace Talabat.Infrastructure.Persistence.Data.Migrations
                     PictureUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     ProductBrandId = table.Column<string>(type: "nvarchar(450)", nullable: true),
-                    ProductCategoryId = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                    ProductCategoryId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CreatedOn = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
+                    lastModifedBy = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    lastModifedOn = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -116,7 +136,11 @@ namespace Talabat.Infrastructure.Persistence.Data.Migrations
                     Product_PictureUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Quantity = table.Column<int>(type: "int", nullable: false),
-                    OrderId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                    OrderId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CreatedOn = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
+                    lastModifedBy = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    lastModifedOn = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false)
                 },
                 constraints: table =>
                 {

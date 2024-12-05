@@ -1,0 +1,18 @@
+﻿@model ProductViewModel<string>
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h2>Edit @Model.Name</h2>
+<form asp-action="Edit" method="post" enctype="multipart/form-data">
+    @Html.AntiForgeryToken()  <!-- This generates the anti-forgery token -->
+    <input asp-for="Id" hidden />
+    <partial name="CreateEditPartialView" model="Model" />
+    <br />
+    <br />
+    <input type="submit" value="Edit" class="btn btn-primary" />
+    <a asp-action="Index" class="btn btn-secondary">Back</a>
+</form>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

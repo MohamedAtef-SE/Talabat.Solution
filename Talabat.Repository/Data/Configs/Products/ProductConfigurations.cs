@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Talabat.Core.Domain.Entities.Products;
+using Talabat.Infrastructure.Persistence.Data._Common;
 
 namespace Talabat.Infrastructure.Persistence.Data.Configs.Products
 {
