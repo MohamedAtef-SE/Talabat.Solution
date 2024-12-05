@@ -14,7 +14,7 @@ using Talabat.Shared.Exceptions;
 
 namespace Talabat.Core.Application.Services.Auth
 {
-    internal class AuthService : IAuthService
+    public class AuthService : IAuthService
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
@@ -149,13 +149,14 @@ namespace Talabat.Core.Application.Services.Auth
         private async Task<string> GenerateTokenAsync(ApplicationUser user)
         {
             var userRoles = await _userManager.GetRolesAsync(user);
-            
+
             var privateClaims = new List<Claim>()
             {
                 new Claim(ClaimTypes.PrimarySid, user.Id),
                 new Claim(ClaimTypes.Email, user.Email?? "N/A"),
                 new Claim(ClaimTypes.GivenName, user.DisplayName),
                 new Claim(ClaimTypes.NameIdentifier,user.UserName??"N/A"),
+                new Claim(ClaimTypes.Name,user.DisplayName),
                 new Claim(ClaimTypes.Role,userRoles.FirstOrDefault()??"N/A")
 
             };

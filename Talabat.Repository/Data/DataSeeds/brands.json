@@ -1,30 +1,30 @@
 [
   {
-    "Id": null,
+    "Id": "52e2f482-c79c-4825-937d-c46e0b62a921",
     "Name": "Starbucks"
   },
   {
-    "Id": null,
+    "Id": "637d79fb-f762-4374-820a-60e25b70ea7d",
     "Name": "Costa"
   },
   {
-    "Id": null,
+    "Id": "fa8968a2-90d8-4b63-b01f-7603354747d8",
     "Name": "Cilantro"
   },
   {
-    "Id": null,
+    "Id": "0cd69f91-45a7-4664-a6f9-0d8b7a3672a0",
     "Name": "TBS"
   },
   {
-    "Id": null,
+    "Id": "e045b086-cd2d-4e2f-ae06-60bde4a10e53",
     "Name": "On The Run"
   },
   {
-    "Id": null,
+    "Id": "4774c7e5-ab9f-4e96-8973-e365cdd3db69",
     "Name": "Caribou"
   },
   {
-    "Id": null,
+    "Id": "2c618e2e-6a55-4654-92b2-08087606925b",
     "Name": "Krispy Kreme"
   }
 ]

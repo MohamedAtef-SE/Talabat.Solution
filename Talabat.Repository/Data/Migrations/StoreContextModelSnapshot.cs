@@ -34,6 +34,14 @@ namespace Talabat.Infrastructure.Persistence.Data.Migrations
                     b.Property<decimal>("Cost")
                         .HasColumnType("decimal(9,2)");
 
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTimeOffset?>("CreatedOn")
+                        .IsRequired()
+                        .HasColumnType("datetimeoffset");
+
                     b.Property<string>("DeliveryTime")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -45,6 +53,13 @@ namespace Talabat.Infrastructure.Persistence.Data.Migrations
                     b.Property<string>("ShortName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("lastModifedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTimeOffset>("lastModifedOn")
+                        .HasColumnType("datetimeoffset");
 
                     b.HasKey("Id");
 
@@ -60,6 +75,14 @@ namespace Talabat.Infrastructure.Persistence.Data.Migrations
                     b.Property<string>("BuyerEmail")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTimeOffset?>("CreatedOn")
+                        .IsRequired()
+                        .HasColumnType("datetimeoffset");
 
                     b.Property<DateTimeOffset>("Date")
                         .HasColumnType("datetimeoffset");
@@ -79,6 +102,13 @@ namespace Talabat.Infrastructure.Persistence.Data.Migrations
                     b.Property<decimal>("Subtotal")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<string>("lastModifedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTimeOffset>("lastModifedOn")
+                        .HasColumnType("datetimeoffset");
+
                     b.HasKey("Id");
 
                     b.HasIndex("DeliveryMethodId");
@@ -92,6 +122,14 @@ namespace Talabat.Infrastructure.Persistence.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTimeOffset?>("CreatedOn")
+                        .IsRequired()
+                        .HasColumnType("datetimeoffset");
+
                     b.Property<string>("OrderId")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
@@ -101,6 +139,13 @@ namespace Talabat.Infrastructure.Persistence.Data.Migrations
 
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
+
+                    b.Property<string>("lastModifedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTimeOffset>("lastModifedOn")
+                        .HasColumnType("datetimeoffset");
 
                     b.HasKey("Id");
 
@@ -114,6 +159,14 @@ namespace Talabat.Infrastructure.Persistence.Data.Migrations
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTimeOffset?>("CreatedOn")
+                        .IsRequired()
+                        .HasColumnType("datetimeoffset");
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -136,6 +189,13 @@ namespace Talabat.Infrastructure.Persistence.Data.Migrations
                     b.Property<string>("ProductCategoryId")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<string>("lastModifedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTimeOffset>("lastModifedOn")
+                        .HasColumnType("datetimeoffset");
+
                     b.HasKey("Id");
 
                     b.HasIndex("ProductBrandId");
@@ -151,9 +211,24 @@ namespace Talabat.Infrastructure.Persistence.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTimeOffset?>("CreatedOn")
+                        .IsRequired()
+                        .HasColumnType("datetimeoffset");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("lastModifedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTimeOffset>("lastModifedOn")
+                        .HasColumnType("datetimeoffset");
 
                     b.HasKey("Id");
 
@@ -166,9 +241,24 @@ namespace Talabat.Infrastructure.Persistence.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTimeOffset?>("CreatedOn")
+                        .IsRequired()
+                        .HasColumnType("datetimeoffset");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("lastModifedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTimeOffset>("lastModifedOn")
+                        .HasColumnType("datetimeoffset");
 
                     b.HasKey("Id");
 

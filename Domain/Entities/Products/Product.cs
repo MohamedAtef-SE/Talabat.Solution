@@ -2,9 +2,9 @@
 {
     public  class Product : BaseAuditableEntity<string>
     {
-        public required string Name { get; set; }
+        public string Name { get; set; } = null!;
         public string Description { get; set; } = null!;
-        public string PictureUrl { get; set; } = null!;
+        public string? PictureUrl { get; set; }
         public decimal Price { get; set; }
         public string? ProductBrandId { get; set; } // FK
         public string? ProductCategoryId { get; set; } // FK
