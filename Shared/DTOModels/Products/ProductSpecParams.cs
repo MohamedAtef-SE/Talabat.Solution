@@ -7,8 +7,8 @@
 
         public string? Search {  get; set; }
         public string? Sort { get; set; }
-        public int? BrandId { get; set; }
-        public int? CategoryId { get; set; }
+        public string? BrandId { get; set; }
+        public string? CategoryId { get; set; }
         public int PageIndex { get => pageIndex; set => pageIndex = value; }
         public int PageSize { get => pageSize; set => pageSize = value > 10 ? 10: value; }
     }

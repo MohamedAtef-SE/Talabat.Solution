@@ -34,7 +34,7 @@ namespace Route.Talabat.Dashboard.Controllers
 
                 return RedirectToAction("Index");
             }
-            catch (Exception ex)
+            catch
             {
                 ModelState.AddModelError("Name", "Please Enter new Name");
                 return View("Index", await _unitOfWork.GetRepository<ProductCategory, string>().GetAllAsync());

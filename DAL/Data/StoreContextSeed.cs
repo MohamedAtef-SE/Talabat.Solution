@@ -1,8 +1,9 @@
 ﻿using System.Text.Json;
 using Talabat.Core.Domain.Entities._Common;
+using Talabat.Infrastructure.Persistence.Data;
 using Talabat.Shared.Exceptions;
 
-namespace Talabat.Infrastructure.Persistence.Data
+namespace Dashboard.DAL.Data
 {
     public class StoreContextSeed
     {
@@ -13,11 +14,11 @@ namespace Talabat.Infrastructure.Persistence.Data
             _dbContext = dbContext;
         }
 
-        public async Task UploadDataSeeds<TEntity,TKey>(string fileName) where TEntity : BaseAuditableEntity<TKey> where TKey : IEquatable<TKey>
+        public async Task UploadDataSeeds<TEntity,TKey>(string jsonFileName) where TEntity : BaseAuditableEntity<TKey> where TKey : IEquatable<TKey>
         {
             if (!_dbContext.Set<TEntity>().Any())
             {
-                var filePath = Path.Combine("../Talabat.Repository", "Data","DataSeeds", fileName);
+                var filePath = Path.Combine("../Dashboard.DAL", "Data","Seeds", jsonFileName);
 
                 if (File.Exists(filePath))
                 {

@@ -3,7 +3,7 @@ using System.Text.Json;
 using Talabat.Core.Domain.Entities.Identity;
 using Talabat.Shared.Exceptions;
 
-namespace Talabat.Infrastructure.Persistence.Identity
+namespace Dashboard.DAL.Identity
 {
     public class AppIdentitySeed
     {
@@ -17,7 +17,7 @@ namespace Talabat.Infrastructure.Persistence.Identity
         {
             if (!_userManager.Users.Any())
             {
-                var filePath = Path.Combine("../Talabat.Repository", "Identity", "Seeds", "users.json");
+                var filePath = Path.Combine("../Dashboard.DAL", "Identity", "Seeds", "users.json");
 
                 if (File.Exists(filePath))
                 {

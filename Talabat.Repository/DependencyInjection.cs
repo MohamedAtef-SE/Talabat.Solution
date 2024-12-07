@@ -39,9 +39,6 @@ namespace Talabat.Infrastructure.Persistence
 
             services.AddScoped(typeof(IBasketRepository), typeof(BasketRepository));
 
-            services.AddScoped<StoreContextSeed>();
-            services.AddScoped<AppIdentitySeed>();
-
             return services;
         }
     }

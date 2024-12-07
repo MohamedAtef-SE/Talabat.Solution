@@ -4,10 +4,10 @@ namespace Talabat.Core.Application.Specifications.Products
 {
     public class ProductsCountForCriteriaSpecification : BaseSpecifications<Product,string>
     {
-        public ProductsCountForCriteriaSpecification(int? brandId = null, int? categoryId = null, string? search = null)
-            : base(P => (!brandId.HasValue || P.ProductBrandId.Equals(brandId.Value))
+        public ProductsCountForCriteriaSpecification(string? brandId = null, string? categoryId = null, string? search = null)
+            : base(P => (String.IsNullOrEmpty(brandId) || P.ProductBrandId!.Equals(brandId))
                        &&
-                      (!categoryId.HasValue || P.ProductCategoryId.Equals(categoryId.Value))
+                      (String.IsNullOrEmpty(categoryId) || P.ProductCategoryId!.Equals(categoryId))
                        &&
                       (string.IsNullOrEmpty(search) || P.Name.Contains(search)))
 

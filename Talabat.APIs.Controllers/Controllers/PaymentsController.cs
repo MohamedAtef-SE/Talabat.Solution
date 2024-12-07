@@ -43,7 +43,7 @@ namespace Talabat.APIs.Controllers.Controllers
               
                     // Then define and call a method to handle the successful payment intent.
                     // handlePaymentIntentSucceeded(paymentIntent);
-                   orderDTO = await _serviceMaanger.PaymentService.UpdatePaymentIntentToSucceedOrFailed(paymentIntent.Id, true);
+                   orderDTO = await _serviceMaanger.PaymentService.UpdatePaymentIntentToSucceedOrFailed(paymentIntent!.Id, true);
                 }
                 else if (stripeEvent.Type == EventTypes.PaymentIntentPaymentFailed)
                 {
@@ -51,7 +51,7 @@ namespace Talabat.APIs.Controllers.Controllers
 
                     // Then define and call a method to handle the failed payment intent.
                     // handlePaymentIntentFailed(paymentIntent);
-                    orderDTO = await _serviceMaanger.PaymentService.UpdatePaymentIntentToSucceedOrFailed(paymentIntent.Id, false); 
+                    orderDTO = await _serviceMaanger.PaymentService.UpdatePaymentIntentToSucceedOrFailed(paymentIntent!.Id, false); 
                 }
                 
                 return Ok(orderDTO);

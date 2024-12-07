@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Dashboard.BAL\Dashboard.BAL.csproj" />
     <ProjectReference Include="..\Domain\Talabat.Core.Domain.csproj" />
     <ProjectReference Include="..\Shared\Talabat.Shared.csproj" />
     <ProjectReference Include="..\Talabat.APIs.Controllers\Talabat.APIs.Controllers.csproj" />

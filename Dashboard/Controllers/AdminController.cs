@@ -41,8 +41,8 @@ namespace Route.Talabat.Dashboard.Controllers
 
                 if (!await _userManager.IsInRoleAsync(user!, "Admin"))
                 {
-                    ModelState.AddModelError("Email", "Admins Only");
-                    return RedirectToAction(nameof(Login));
+                    ModelState.AddModelError(string.Empty, "Admins Only");
+                    return View();
                 }
                 
                 return RedirectToAction("Index", "Home");

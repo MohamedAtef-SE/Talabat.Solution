@@ -12,7 +12,7 @@ namespace Talabat.Core.Application.Mapping
             destMember = string.Empty;
             
             if(!String.IsNullOrEmpty(source.PictureUrl))
-                destMember = $"{configuration.GetSection("URLs")["ApiBaseUrl"]}/{source.PictureUrl}";
+                destMember = $"{configuration.GetSection("URLs")["ApiBaseUrl"]}/static/{source.PictureUrl}";
 
             return destMember;
         }

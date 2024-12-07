@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.FileProviders;
 using Newtonsoft.Json;
 using Talabat.APIs.Extensions;
 using Talabat.APIs.Middlewares;
@@ -102,17 +103,17 @@ namespace Talabat.APIs
             app.UseAuthentication();
             app.UseAuthorization();
 
-
             app.MapControllers();
-
-            #region Update-Database
-
-            await app.InitializeAsync();
+           
+            await app.UpdateDBAsync(); // Update-Database
 
             #endregion
-
-            #endregion
-            app.UseStaticFiles();
+            var dashboardWWWRoot = Path.Combine(Directory.GetCurrentDirectory(),"..", "Dashboard","wwwroot");
+            app.UseStaticFiles(new StaticFileOptions()
+            {
+                FileProvider = new PhysicalFileProvider(dashboardWWWRoot),
+                RequestPath = "/static"
+            });
             app.Run();
         }
     }

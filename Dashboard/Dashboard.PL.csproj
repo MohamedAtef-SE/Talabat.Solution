@@ -52,6 +52,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\DAL\Dashboard.DAL.csproj" />
+    <ProjectReference Include="..\Dashboard.BAL\Dashboard.BAL.csproj" />
     <ProjectReference Include="..\Talabat.APIs\Talabat.APIs.csproj" />
   </ItemGroup>
 

@@ -39,15 +39,15 @@ namespace Talabat.Core.Application.Services.Products
 
                 var specs = new ProductWithBrandAndCategorySpecifications(specParams);
                 var products = await _unitOfWork.GetRepository<Product,string>().GetAllWithSpecAsync(specs);
+               
                 var productsDTO = _mapper.Map<IReadOnlyList<Product>, IReadOnlyList<ProductDTO>>(products);
-
 
                 var pagination = new Pagination<ProductDTO>()
                 {
                     PageIndex = specParams.PageIndex,
                     PageSize = specParams.PageSize,
                     Count = productsCount,
-                    Data = productsDTO,
+                    Data = productsDTO
                 };
 
                 return pagination;

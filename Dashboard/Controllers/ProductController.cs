@@ -1,19 +1,17 @@
 ﻿using AutoMapper;
 using Dashboard.ViewModels;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Route.Talabat.Dashboard.Helpers;
 using Talabat.Core.Domain.Contracts;
-using Talabat.Core.Domain.Entities.Identity;
 using Talabat.Core.Domain.Entities.Products;
 using Talabat.Infrastructure.Persistence.Data;
 
 namespace Route.Talabat.Dashboard.Controllers
 {
     [Authorize(Roles = "Admin")]
-    public class ProductController(StoreContext _dbContext, IUnitOfWork _unitOfWork, SignInManager<ApplicationUser> _signInManager, UserManager<ApplicationUser> _userManager, IMapper _mapper, IHttpContextAccessor _httpContextAccessor) : Controller
+    public class ProductController(StoreContext _dbContext, IUnitOfWork _unitOfWork, IMapper _mapper,IConfiguration _configuration) : Controller
     {
         [HttpGet]
         public async Task<IActionResult> Index()
@@ -37,10 +35,10 @@ namespace Route.Talabat.Dashboard.Controllers
             {
                 if (productViewModel.Image != null)
                 {
-                    productViewModel.PictureUrl = PictureSettings.UploadFile(productViewModel.Image, "products");
+                    productViewModel.PictureUrl = PictureSettings.UploadFile(productViewModel.Image,"products");
                 }
                 else
-                    productViewModel.PictureUrl = "assets/img/products/_Default.jpg";
+                    productViewModel.PictureUrl = Path.Combine("assets","img","products", "_Default.jpg");
 
                 var mappedProduct = _mapper.Map<ProductViewModel<string>, Product>(productViewModel);
 
@@ -75,13 +73,13 @@ namespace Route.Talabat.Dashboard.Controllers
                 {
                     if (productViewModel.PictureUrl != null)
                     {
-                        PictureSettings.DeleteFile(productViewModel.PictureUrl, "products");
+                        PictureSettings.DeleteFile(productViewModel.PictureUrl);
                     }
 
-                    productViewModel.PictureUrl = PictureSettings.UploadFile(productViewModel.Image, "products");
+                    productViewModel.PictureUrl = PictureSettings.UploadFile(productViewModel.Image,"products");
                 }
                 else
-                    productViewModel.PictureUrl = "assets/img/products/_Default.jpg";
+                    productViewModel.PictureUrl = Path.Combine("assets", "img", "products", "_Default.jpg");
 
                 var mappedProduct = _mapper.Map<ProductViewModel<string>, Product>(productViewModel);
 
@@ -121,14 +119,13 @@ namespace Route.Talabat.Dashboard.Controllers
         [ValidateAntiForgeryToken]  // This validates the anti-forgery token
         public async Task<IActionResult> Delete(ProductViewModel<string> productViewModel)
         {
-            if (productViewModel is null) return NotFound();
             try
             {
                 var product = await _unitOfWork.GetRepository<Product, string>().GetAsync(productViewModel.Id);
-
+                if (product is null) return NotFound();
                 if (product.PictureUrl != null)
                 {
-                    PictureSettings.DeleteFile(product.PictureUrl, "products");
+                    PictureSettings.DeleteFile(product.PictureUrl);
                 }
 
                 _unitOfWork.GetRepository<Product, string>().Delete(product);

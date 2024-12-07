@@ -1,4 +1,7 @@
+using Dashboard.DAL.Data;
+using Dashboard.DAL.Identity;
 using Dashboard.Middlewares;
+using Dashboard.PL.Helpers;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -19,7 +22,7 @@ namespace Dashboard
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public async static Task Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
 
@@ -61,7 +64,8 @@ namespace Dashboard
             builder.Services.AddScoped(typeof(IUnitOfWork), typeof(UnitOfWork));
             builder.Services.AddAutoMapper(typeof(MapProfile));
             builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("JwtSettings"));
-
+            builder.Services.AddScoped<StoreContextSeed>();
+            builder.Services.AddScoped<AppIdentitySeed>();
 
 
             // Configure JWT Authentication
@@ -106,6 +110,8 @@ namespace Dashboard
             }
 
             app.UseHttpsRedirection();
+
+            
             app.UseStaticFiles();
 
             app.UseRouting();
@@ -121,6 +127,8 @@ namespace Dashboard
                 pattern: "{controller=Admin}/{action=Login}/{id?}");
 
             #endregion
+
+            await app.InitializeAsync(); // Upload Initial Data Seeds
 
             app.Run();
         }
