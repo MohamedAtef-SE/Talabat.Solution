@@ -1,0 +1,34 @@
+[
+  {
+    "Id": "aab9104e-5043-40b1-8434-9885463bb884",
+    "Name": "Frappuccino"
+  },
+  {
+    "Id": "a810006a-aaec-4a83-98dd-4ffccdc65a48",
+    "Name": "Latte"
+  },
+  {
+    "Id": "55d4803d-6207-45a2-ad25-f53b752714c0",
+    "Name": "Mocha"
+  },
+  {
+    "Id": "42f18b5d-a366-42fa-a447-44ab1c4e36cc",
+    "Name": "Macchiato"
+  },
+  {
+    "Id": "95aade63-8f83-4bae-886f-fb4155cd5272",
+    "Name": "Matcha"
+  },
+  {
+    "Id": "dd9490aa-5e53-449d-8ca9-702d9b39fc47",
+    "Name": "Cake"
+  },
+  {
+    "Id": "90b62462-919d-445b-bb2b-adcfcb799040",
+    "Name": "Donuts"
+  },
+  {
+    "Id": "c2e201dd-5ad1-4dbd-b343-52d96f2a5c11",
+    "Name": "Salad"
+  }
+]

@@ -1,33 +1,54 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Talabat.Core.Contracts;
-using Talabat.Core.Entities.Products;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Talabat.APIs.Controllers.Attributes;
+using Talabat.Core.Application.Abstractions._Common;
+using Talabat.Core.Application.Abstractions.Services;
+using Talabat.Shared.DTOModels.Products;
+using Talabat.Shared.Errors;
 
 namespace Talabat.APIs.Controllers.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ProductsController : ControllerBase
+    public class ProductsController(IServiceManager _serviceManager, IMapper _mapper) : ControllerBase
     {
-        private readonly IGenericRepository<Product> _genericRepository;
+        
 
-        public ProductsController(IGenericRepository<Product> genericRepository)
-        {
-            _genericRepository = genericRepository;
-        }
-
+        [Cached(2)]
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Product>>> GetProducts()
+        public async Task<ActionResult<Pagination<ProductDTO>>> GetProducts([FromQuery] ProductSpecParams specParams)
         {
-            var products = await _genericRepository.GetAllAsync();
-            return Ok(products);
+            var result = await _serviceManager.ProductService.GetProductsAsync(specParams);
+
+            return result is not null ? Ok(result) : BadRequest(new APIErrorResponse(400,"Fetching products failed 😔."));
+            
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<Product>> GetProduct(int id)
+        [ProducesResponseType(typeof(ProductDTO), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(APIErrorResponse), StatusCodes.Status404NotFound)]
+        public async Task<ActionResult<ProductDTO>> GetProduct(string id)
         {
-            var product = await _genericRepository.GetAsync(id);
+           var result = await _serviceManager.ProductService.GetProductAsync(id);
 
-            return Ok(product);
+            return result is not null ? Ok(result) : NotFound(new APIErrorResponse(404,$"No Product with this Id: {id} found..."));
+        }
+
+        [HttpGet("Brands")]
+        public async Task<ActionResult<IReadOnlyList<BrandDTO>>> GetBrands()
+        {
+           var result = await _serviceManager.ProductService.GetBrandsAsync();
+
+            return result is not null ? Ok(result) : BadRequest(new APIErrorResponse(400, "Fetching brands failed 😔."));
+        }
+
+        [HttpGet("Categories")]
+        public async Task<ActionResult<IReadOnlyList<CategoryDTO>>> GetCategories()
+        {
+            var result = await _serviceManager.ProductService.GetCategoriesAsync();
+
+            return result is not null ? Ok(result) : BadRequest(new APIErrorResponse(400, "Fetching categories failed 😔."));
         }
     }
 }

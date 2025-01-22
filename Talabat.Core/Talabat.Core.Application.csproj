@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.11" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Dashboard.BAL\Dashboard.BAL.csproj" />
+    <ProjectReference Include="..\Domain\Talabat.Core.Domain.csproj" />
+    <ProjectReference Include="..\Shared\Talabat.Shared.csproj" />
+    <ProjectReference Include="..\Talabat.APIs.Controllers\Talabat.APIs.Controllers.csproj" />
+    <ProjectReference Include="..\Talabat.Core.Application.Abstractions\Talabat.Core.Application.Abstractions.csproj" />
+    <ProjectReference Include="..\Talabat.Repository\Talabat.Infrastructure.Persistence.csproj" />
+  </ItemGroup>
+
+</Project>

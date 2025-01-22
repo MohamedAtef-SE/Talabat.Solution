@@ -1,0 +1,112 @@
+[
+  {
+    "Id": null,
+    "Name": "Double Caramel Frappuccino",
+    "Description": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna.",
+    "Price": 200,
+    "PictureUrl": "assets/img/products/Double_Caramel_Frappuccino.png",
+    "ProductCategoryId": "aab9104e-5043-40b1-8434-9885463bb884",
+    "ProductBrandId": "0cd69f91-45a7-4664-a6f9-0d8b7a3672a0",
+    "CreatedBy": "N/A"
+  },
+  {
+    "Id": null,
+    "Name": "White Chocolate Mocha Frappuccino",
+    "Description": "Nunc viverra imperdiet enim. Fusce est. Vivamus a tellus.",
+    "Price": 150,
+    "PictureUrl": "assets/img/products/White_Chocolate_Mocha_Frappuccino.png",
+    "ProductCategoryId": "aab9104e-5043-40b1-8434-9885463bb884",
+    "ProductBrandId": "637d79fb-f762-4374-820a-60e25b70ea7d",
+    "CreatedBy": "N/A"
+  },
+  {
+    "Id": null,
+    "Name": "Iced Cafe Latte",
+    "Description": "Suspendisse dui purus, scelerisque at, vulputate vitae, pretium mattis, nunc. Mauris eget neque at sem venenatis eleifend. Ut nonummy.",
+    "Price": 180,
+    "PictureUrl": "assets/img/products/Iced_Cafe_Latte.png",
+    "ProductCategoryId": "a810006a-aaec-4a83-98dd-4ffccdc65a48",
+    "ProductBrandId": "637d79fb-f762-4374-820a-60e25b70ea7d",
+    "CreatedBy": "N/A"
+  },
+  {
+    "Id": null,
+    "Name": "White Chocolate Mocha",
+    "Description": "Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Proin pharetra nonummy pede. Mauris et orci.",
+    "Price": 300,
+    "PictureUrl": "assets/img/products/White_Chocolate_Mocha.png",
+    "ProductCategoryId": "55d4803d-6207-45a2-ad25-f53b752714c0",
+    "ProductBrandId": "e045b086-cd2d-4e2f-ae06-60bde4a10e53",
+    "CreatedBy": "N/A"
+  },
+  {
+    "Id": null,
+    "Name": "Iced Caramel Macchiato",
+    "Description": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna.",
+    "Price": 250,
+    "PictureUrl": "assets/img/products/Iced_Caramel_Macchiato.png",
+    "ProductCategoryId": "42f18b5d-a366-42fa-a447-44ab1c4e36cc",
+    "ProductBrandId": "e045b086-cd2d-4e2f-ae06-60bde4a10e53",
+    "CreatedBy": "N/A"
+  },
+  {
+    "Id": null,
+    "Name": "Hot Caramel Macchiato",
+    "Description": "Aenean nec lorem. In porttitor. Donec laoreet nonummy augue.",
+    "Price": 120,
+    "PictureUrl": "assets/img/products/Hot_Caramel_Macchiato.png",
+    "ProductCategoryId": "42f18b5d-a366-42fa-a447-44ab1c4e36cc",
+    "ProductBrandId": "fa8968a2-90d8-4b63-b01f-7603354747d8",
+    "CreatedBy": "N/A"
+  },
+  {
+    "Id": null,
+    "Name": "Iced Matcha Latte",
+    "Description": "Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna.",
+    "Price": 10,
+    "PictureUrl": "assets/img/products/Iced_Matcha_Latte.jpg",
+    "ProductCategoryId": "a810006a-aaec-4a83-98dd-4ffccdc65a48",
+    "ProductBrandId": "52e2f482-c79c-4825-937d-c46e0b62a921",
+    "CreatedBy": "N/A"
+  },
+  {
+    "Id": null,
+    "Name": "Honey Cake",
+    "Description": "Suspendisse dui purus, scelerisque at, vulputate vitae, pretium mattis, nunc. Mauris eget neque at sem venenatis eleifend. Ut nonummy.",
+    "Price": 8,
+    "PictureUrl": "assets/img/products/Honey_Cake.jpg",
+    "ProductCategoryId": "dd9490aa-5e53-449d-8ca9-702d9b39fc47",
+    "ProductBrandId": "637d79fb-f762-4374-820a-60e25b70ea7d",
+    "CreatedBy": "N/A"
+  },
+  {
+    "Id": null,
+    "Name": "Blueberry Cheesecake",
+    "Description": "Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna.",
+    "Price": 15,
+    "PictureUrl": "assets/img/products/Blueberry_Cheesecake.png",
+    "ProductCategoryId": "dd9490aa-5e53-449d-8ca9-702d9b39fc47",
+    "ProductBrandId": "52e2f482-c79c-4825-937d-c46e0b62a921",
+    "CreatedBy": "N/A"
+  },
+  {
+    "Id": null,
+    "Name": "Glazed Donuts",
+    "Description": "Nunc viverra imperdiet enim. Fusce est. Vivamus a tellus.",
+    "Price": 18,
+    "PictureUrl": "assets/img/products/Glazed_Donuts.jpg",
+    "ProductCategoryId": "90b62462-919d-445b-bb2b-adcfcb799040",
+    "ProductBrandId": "2c618e2e-6a55-4654-92b2-08087606925b",
+    "CreatedBy": "N/A"
+  },
+  {
+    "Id": null,
+    "Name": "Greek Salad",
+    "Description": "Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Proin pharetra nonummy pede. Mauris et orci.",
+    "Price": 15,
+    "PictureUrl": "assets/img/products/Greek_Salad.jpg",
+    "ProductCategoryId": "c2e201dd-5ad1-4dbd-b343-52d96f2a5c11",
+    "ProductBrandId": "4774c7e5-ab9f-4e96-8973-e365cdd3db69",
+    "CreatedBy": "N/A"
+  }
+]

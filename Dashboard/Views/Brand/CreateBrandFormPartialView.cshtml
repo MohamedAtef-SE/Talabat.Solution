@@ -1,0 +1,12 @@
+﻿@model BrandViewModel
+
+<form method="post" asp-action="Create">
+    @Html.AntiForgeryToken()  <!-- This generates the anti-forgery token -->
+    <div class="input-group mb-2">
+        <input asp-for="Name" class="form-control" />
+        <div class="input-group-append">
+            <button type="submit" class="btn m-1 btn-primary">Add new brand</button>
+        </div>
+    </div>
+    <span asp-validation-for="Name" class="text-danger"></span>
+</form>

@@ -1,4 +1,4 @@
-﻿namespace Talabat.Repository
+﻿namespace Talabat.Infrastructure.Persistence
 {
     internal class AssemblyInformation
     {
